@@ -1,0 +1,14 @@
+.container {
+  background-color: black;
+}
+
+.item {
+  transition: transform 500ms;
+}
+
+.container.item: focus;
+
+.item:hover {
+  transform: scale(1.5);
+  z-index: 1;
+}
