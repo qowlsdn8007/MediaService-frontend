@@ -8,7 +8,6 @@ import Data from "./videoData.json"
 
 function App() {
   const { data } = Data;
-  console.log(data);
   return (
     <div className="App">
       <VideoList props={data} />
