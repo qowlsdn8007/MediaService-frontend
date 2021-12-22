@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import {
   CardActionArea,
   Card,
@@ -7,21 +7,21 @@ import {
   Typography,
   Container,
 } from "@mui/material";
-import { VideoThumnail } from "../D-06 (lolomo-row)/VideoThumnail";
-
+import { Thumbnail } from "./Thumbnail";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import ProgressBar from "./ProgressBar";
+import "./lolomo.css";
 
-const VideoCard = ({ thumbnail }) => {
+const TitleCard = ({ thumbnail }) => {
   return (
     <Card sx={{ maxWidth: 300 }} className="item">
       <CardActionArea>
         <CardMedia>
-          <VideoThumnail thumbnail={thumbnail} />
+          <Thumbnail thumbnail={thumbnail} />
         </CardMedia>
         <CardContent className="sub-item">
           <Container sx={{ display: "flex" }}>
@@ -42,4 +42,4 @@ const VideoCard = ({ thumbnail }) => {
   );
 };
 
-export default VideoCard;
+export default TitleCard;

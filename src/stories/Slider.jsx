@@ -1,22 +1,21 @@
 import React from "react";
-import { Grid } from "@mui/material";
-import { VideoThumnail } from "./VideoThumnail";
 import RowTitle from "./RowTitle";
-import VideoCard from "../D-07 (title-card)/VideoCard";
+import TitleCard from "./TitleCard";
 import "./lolomo.css";
+import { Card } from "@mui/material";
 
-const VideoList = ({ props }) => {
+const Slider = ({ props }) => {
   console.log(props);
   return (
     <div className="container">
       <RowTitle />
       <div style={{ display: "flex" }}>
         {props.map((data) => (
-          <VideoCard thumbnail={data.thumbnail} sx={{ paddingRight: 1 }} />
+          <TitleCard thumbnail={data.thumbnail} />
         ))}
       </div>
     </div>
   );
 };
 
-export default VideoList;
+export default Slider;
