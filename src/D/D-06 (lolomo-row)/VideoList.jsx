@@ -10,13 +10,11 @@ const VideoList = ({ props }) => {
   return (
     <div className="container">
       <RowTitle />
-      <Grid container>
+      <div style={{ display: "flex" }}>
         {props.map((data) => (
-          <Grid item sx={{ paddingRight: 1 }}>
-            <VideoThumnail thumbnail={data.thumbnail} />
-          </Grid>
+          <VideoCard thumbnail={data.thumbnail} sx={{ paddingRight: 1 }} />
         ))}
-      </Grid>
+      </div>
     </div>
   );
 };

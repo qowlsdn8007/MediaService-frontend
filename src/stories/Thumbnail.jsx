@@ -1,7 +1,7 @@
 import React from "react";
 import "./lolomo.css";
 
-export const VideoThumnail = ({ thumbnail }) => {
+export const Thumbnail = ({ thumbnail }) => {
   return (
     <>
       <img
