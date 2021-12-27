@@ -4,14 +4,13 @@ import TitleCard from "./TitleCard";
 import "./lolomo.css";
 import { Card } from "@mui/material";
 
-const Slider = ({ props }) => {
-  console.log(props);
+const Slider = ({ props, onSelectSlide }) => {
   return (
     <div className="container">
       <RowTitle />
       <div style={{ display: "flex" }}>
         {props.map((data) => (
-          <TitleCard thumbnail={data.thumbnail} />
+          <TitleCard thumbnail={data.thumbnail} onClick={onSelectSlide} />
         ))}
       </div>
     </div>
