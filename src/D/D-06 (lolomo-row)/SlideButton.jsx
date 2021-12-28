@@ -2,10 +2,10 @@ import React from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-const SlideButton = () => {
+const SlideButton = ({ onClick }) => {
   return (
     <div>
-      <ArrowBackIosNewIcon />
+      <ArrowBackIosNewIcon onClick={onClick} />
       <ArrowForwardIosIcon />
     </div>
   );

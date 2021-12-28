@@ -1,23 +1,24 @@
 import { createAction, handleActions} from 'redux-actions';
 
 const SELECT = "slider/SELECT";
-const ELEMENTREF = "slider/ELEMENTREF";
+const SETELEMENTREF = "slider/ELEMENTREF";
+const SETWIDTH = "slider/SETWIDTH";
 
 export const select = createAction(SELECT);
-export const elementRef = createAction(ELEMENTREF);
-
+export const setElementRef = createAction(SETELEMENTREF);
+export const setWidth = createAction(SETWIDTH);
 
 const initialState = {
     elementRef: null,
     currentSlide: null,
     width: null,
-    
 }
 
 const slider = handleActions(
     {
+        [SETWIDTH]: (state, {payload: width}) => ({...state, width: width}),
         [SELECT]: (state, {payload: movie}) => ({...state, currentSlide: movie}),
-        [ELEMENTREF]: (state, {payload: currentRef}) => ({...state, elementRef: currentRef}),
+        [SETELEMENTREF]: (state, {payload: currentRef}) => ({...state, elementRef: currentRef}),
     },
     initialState,
 );

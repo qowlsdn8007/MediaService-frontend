@@ -4,7 +4,6 @@
 
 .item {
   background-color: black;
-  transition: transform 2000ms;
 }
 
 .sub-item {
@@ -13,6 +12,7 @@
 .container .item:focus,
 .container .item:hover {
   transform: scale(1.5);
+  transition: transform 300ms ease 100ms;
   z-index: 1;
 }
 

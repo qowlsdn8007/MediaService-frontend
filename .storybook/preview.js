@@ -6,4 +6,10 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  decorators: [],
+  loaders: [
+      async () => ({
+          store: await import('../src/index').store
+      })
+  ]
 }
