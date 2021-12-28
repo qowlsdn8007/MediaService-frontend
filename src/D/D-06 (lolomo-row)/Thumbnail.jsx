@@ -1,7 +1,7 @@
 import React from "react";
 import "./lolomo.css";
 
-export const VideoThumnail = ({ thumbnail }) => {
+export const Thumbnail = ({ thumbnail, onMouseOverCapture }) => {
   return (
     <>
       <img
@@ -10,6 +10,7 @@ export const VideoThumnail = ({ thumbnail }) => {
         alt="test"
         height="180"
         width="300"
+        onMouseOverCapture={onMouseOverCapture}
       />
     </>
   );

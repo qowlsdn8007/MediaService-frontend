@@ -4,7 +4,6 @@
 
 .item {
   background-color: black;
-  transition: transform 2000ms;
 }
 
 .sub-item {
@@ -13,9 +12,33 @@
 .container .item:focus,
 .container .item:hover {
   transform: scale(1.5);
+  transition: transform 300ms ease 100ms;
   z-index: 1;
 }
 
 .item:hover .sub-item {
   display: inline;
+}
+
+.slider-pagination-page {
+  background-color: #ffffff;
+  display: inline-block;
+  height: 2px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+  width: 20px;
+}
+.slider-pagination-page + .slider-pagination-page {
+  margin-left: 5px;
+}
+
+.slider-pagination-page--active {
+  opacity: 1;
+}
+
+.slider-block {
+  align-items: center;
+  display: flex;
+  padding: 20px 60px;
+  justify-content: space-between;
 }
