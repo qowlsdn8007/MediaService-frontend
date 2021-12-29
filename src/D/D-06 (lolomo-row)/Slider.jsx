@@ -24,7 +24,7 @@ const Slider = () => {
   const handlePaginationVisable = () => {
     setPaginatorVisible(!paginatorVisible);
   };
-  
+
   return (
     <>
       <div className="slider-block">
