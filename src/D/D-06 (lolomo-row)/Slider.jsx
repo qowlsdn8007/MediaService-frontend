@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RowTitle from "./RowTitle";
 import TitleCard from "../D-07 (title-card)/TitleCard";
 import "./lolomo.css";
 import { useSelector, useDispatch } from "react-redux";
-import { select } from "../../modules/slider";
+import { select, setPaginatorTotalPage } from "../../modules/slider";
 import useSliding from "./useSliding";
 import useSizeElement from "./useSizeElement";
-import SlideButton from "./SlideButton";
+import { SlideButtonPrev, SlideButtonNext } from "./SlideButton";
 import SliderPaginator from "./SliderPaginator";
 
 const Slider = () => {
@@ -15,21 +15,26 @@ const Slider = () => {
 
   const slideWidth = useSelector((state) => state.slider.width);
   const slideRef = useSelector((state) => state.slider.elementRef);
+  const sliderTotalPage = useSelector((state) => state.slider.sliderTotalPage);
+
   const { handlePrev, handleNext, containerRef, hasNext, hasPrev } = useSliding(
     slideWidth,
     movies.length
   );
-
   const [paginatorVisible, setPaginatorVisible] = useState(false);
   const handlePaginationVisable = () => {
     setPaginatorVisible(!paginatorVisible);
   };
 
+  dispatch(setPaginatorTotalPage(movies.length));
+
   return (
     <>
-      <div className="slider-block">
+      <div className="slider-block--header">
         <RowTitle />
-        {paginatorVisible && <SliderPaginator movieNumber={movies.length} />}
+        {paginatorVisible && (
+          <SliderPaginator props={{ totalPage: sliderTotalPage }} />
+        )}
       </div>
       <div
         className="container"
@@ -37,12 +42,11 @@ const Slider = () => {
         onMouseOver={handlePaginationVisable}
         onMouseLeave={handlePaginationVisable}
       >
-        <div style={{ display: "flex" }}>
-          {movies.map((movie) => (
-            <TitleCard movie={movie} key={movies.indexOf(movie)} />
-          ))}
-        </div>
-        {hasPrev && <SlideButton onClick={handlePrev} />}
+        {movies.map((movie) => (
+          <TitleCard movie={movie} key={movies.indexOf(movie)} />
+        ))}
+        <SlideButtonPrev onClick={handlePrev} />
+        <SlideButtonNext onClick={handlePrev} />
       </div>
     </>
   );

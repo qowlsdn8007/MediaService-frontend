@@ -1,5 +1,6 @@
 .container {
-  background-color: black;
+  display: flex;
+  position: relative;
 }
 
 .item {
@@ -36,9 +37,31 @@
   opacity: 1;
 }
 
-.slider-block {
+.slider-block--header {
   align-items: center;
   display: flex;
   padding: 20px 60px;
   justify-content: space-between;
+}
+
+.slider-nav-button {
+  -webkit-apparence: none;
+  background: rgba(0, 0, 0, 0.33);
+  border: 0;
+  bottom: 0;
+  color: #ffffff;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 60px;
+  height: 100%;
+}
+
+.slider-nav-button--prev {
+  left: 0;
+}
+
+.slider-nav-button--next {
+  right: 0;
 }
