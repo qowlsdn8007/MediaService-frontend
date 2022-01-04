@@ -19,11 +19,15 @@ import { useSelector, useDispatch } from "react-redux";
 import useSizeElement from "../D-06 (lolomo-row)/useSizeElement";
 import { select, setWidth, setElementRef } from "../../modules/slider.js";
 
-const TitleCard = ({ movie }) => {
+const TitleCard = ({ movie, itemsPerPage }) => {
   const { width, elementRef } = useSizeElement();
   const dispatch = useDispatch();
   return (
-    <Card sx={{ backgroundColor: "black" }} className="item" ref={elementRef}>
+    <Card
+      sx={{ backgroundColor: "black", flex: `0 0 100 / ${itemsPerPage} ` }}
+      className="item"
+      ref={elementRef}
+    >
       <CardActionArea>
         <CardMedia>
           <Thumbnail

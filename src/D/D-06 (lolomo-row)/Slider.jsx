@@ -28,6 +28,27 @@ const Slider = () => {
 
   dispatch(setPaginatorTotalPage(movies.length));
 
+  const [style, setStyle] = useState({
+    transition: "transform 300ms ease 100ms",
+  });
+  const [currentX, setCurrentX] = useState(0);
+  const itemsPerPage = 6;
+  const handleSlideMove = (type) => {
+    if (type === "next") {
+      setCurrentX(currentX + 1);
+      console.log(currentX);
+      Math.ceil(movies.length / itemsPerPage) > currentX &&
+        setStyle({ ...style, transform: `translateX(${currentX * -96}%)` });
+    } else {
+      // "prev"
+      setCurrentX(currentX - 1);
+      console.log(currentX);
+      0 < currentX &&
+        setStyle({ ...style, transform: `translateX(${currentX * -96}%)` });
+    }
+    console.log(style);
+  };
+
   return (
     <>
       <div className="slider-block--header">
@@ -36,17 +57,24 @@ const Slider = () => {
           <SliderPaginator props={{ totalPage: sliderTotalPage }} />
         )}
       </div>
+
       <div
         className="container"
         ref={containerRef}
         onMouseOver={handlePaginationVisable}
         onMouseLeave={handlePaginationVisable}
       >
-        {movies.map((movie) => (
-          <TitleCard movie={movie} key={movies.indexOf(movie)} />
-        ))}
-        <SlideButtonPrev onClick={handlePrev} />
-        <SlideButtonNext onClick={handlePrev} />
+        <div className="slider-items" style={style}>
+          {movies.map((movie) => (
+            <TitleCard
+              movie={movie}
+              itemsPerPage={6}
+              key={movies.indexOf(movie)}
+            />
+          ))}
+        </div>
+        <SlideButtonPrev onClick={() => handleSlideMove("prev")} />
+        <SlideButtonNext onClick={() => handleSlideMove("next")} />
       </div>
     </>
   );
