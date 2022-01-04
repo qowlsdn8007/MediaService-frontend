@@ -29,7 +29,7 @@ const Slider = () => {
     <>
       <div className="slider-block">
         <RowTitle />
-        {paginatorVisible && <SliderPaginator movieNumber={movies.length} />}
+        {paginatorVisible && <SliderPaginator />}
       </div>
       <div
         className="container"

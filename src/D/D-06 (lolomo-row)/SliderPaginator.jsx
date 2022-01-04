@@ -1,7 +1,7 @@
 import React from "react";
 import "./lolomo.css";
 
-const SliderPaginator = (movieNumber) => {
+const SliderPaginator = () => {
   return (
     <div className="slider-pagination">
       <span className="slider-pagination-page slider-pagination-page--active"></span>
