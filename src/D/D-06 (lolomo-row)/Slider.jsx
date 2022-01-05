@@ -25,7 +25,7 @@ const Slider = () => {
 
   //  function for
   const handleSlideNext = () => {
-    currentPage <= totalPage && setCurrentPage((x) => x + 1);
+    currentPage < totalPage && setCurrentPage((x) => x + 1);
   };
 
   const handleSlidePrev = () => {

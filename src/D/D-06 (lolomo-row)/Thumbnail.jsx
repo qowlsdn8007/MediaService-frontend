@@ -8,8 +8,8 @@ export const Thumbnail = ({ thumbnail, onMouseOverCapture }) => {
         //className="item"
         src={thumbnail}
         alt="test"
-        height="180"
-        width="300"
+        height="100%"
+        width="100%"
         onMouseOverCapture={onMouseOverCapture}
       />
     </>
