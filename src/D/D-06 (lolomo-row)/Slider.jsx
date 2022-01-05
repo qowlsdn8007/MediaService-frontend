@@ -59,7 +59,7 @@ const Slider = () => {
           {movies.map((movie) => (
             <TitleCard
               movie={movie}
-              itemsPerPage={6}
+              itemsPerPage={itemsPerPage}
               key={movies.indexOf(movie)}
             />
           ))}
