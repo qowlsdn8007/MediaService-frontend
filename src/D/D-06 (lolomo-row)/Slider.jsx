@@ -2,65 +2,56 @@ import React, { useEffect, useState } from "react";
 import RowTitle from "./RowTitle";
 import TitleCard from "../D-07 (title-card)/TitleCard";
 import "./lolomo.css";
-import { useSelector, useDispatch } from "react-redux";
-import { select, setPaginatorTotalPage } from "../../modules/slider";
-import useSliding from "./useSliding";
-import useSizeElement from "./useSizeElement";
+import { useSelector } from "react-redux";
 import { SlideButtonPrev, SlideButtonNext } from "./SlideButton";
 import SliderPaginator from "./SliderPaginator";
 
 const Slider = () => {
   const movies = useSelector((state) => state.movie);
-  const dispatch = useDispatch();
-
-  const slideWidth = useSelector((state) => state.slider.width);
-  const slideRef = useSelector((state) => state.slider.elementRef);
-  const sliderTotalPage = useSelector((state) => state.slider.sliderTotalPage);
-
-  const { handlePrev, handleNext, containerRef, hasNext, hasPrev } = useSliding(
-    slideWidth,
-    movies.length
-  );
   const [paginatorVisible, setPaginatorVisible] = useState(false);
   const handlePaginationVisable = () => {
     setPaginatorVisible(!paginatorVisible);
   };
 
-  dispatch(setPaginatorTotalPage(movies.length));
-
   const [style, setStyle] = useState({
     transition: "transform 300ms ease 100ms",
+    transform: "translateX(0%)",
   });
-  const [currentX, setCurrentX] = useState(0);
+  //  const for paging
+  const firstPage = 1;
   const itemsPerPage = 6;
-  const handleSlideMove = (type) => {
-    if (type === "next") {
-      setCurrentX(currentX + 1);
-      console.log(currentX);
-      Math.ceil(movies.length / itemsPerPage) > currentX &&
-        setStyle({ ...style, transform: `translateX(${currentX * -96}%)` });
-    } else {
-      // "prev"
-      setCurrentX(currentX - 1);
-      console.log(currentX);
-      0 < currentX &&
-        setStyle({ ...style, transform: `translateX(${currentX * -96}%)` });
-    }
-    console.log(style);
+  const totalPage = Math.ceil(movies.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(firstPage);
+
+  //  function for
+  const handleSlideNext = () => {
+    currentPage <= totalPage && setCurrentPage((x) => x + 1);
   };
+
+  const handleSlidePrev = () => {
+    currentPage > firstPage && setCurrentPage((x) => x - 1);
+  };
+
+  // rendering when event accurred
+  useEffect(() => {
+    const translateRatio = (currentPage - 1) * -96;
+    setStyle((prevStyle) => ({
+      ...prevStyle,
+      transform: `translateX(${translateRatio}%)`,
+    }));
+  }, [currentPage]);
 
   return (
     <>
       <div className="slider-block--header">
         <RowTitle />
         {paginatorVisible && (
-          <SliderPaginator props={{ totalPage: sliderTotalPage }} />
+          <SliderPaginator props={{ totalPage, currentPage }} />
         )}
       </div>
 
       <div
         className="container"
-        ref={containerRef}
         onMouseOver={handlePaginationVisable}
         onMouseLeave={handlePaginationVisable}
       >
@@ -73,8 +64,8 @@ const Slider = () => {
             />
           ))}
         </div>
-        <SlideButtonPrev onClick={() => handleSlideMove("prev")} />
-        <SlideButtonNext onClick={() => handleSlideMove("next")} />
+        <SlideButtonPrev onClick={() => handleSlidePrev()} />
+        <SlideButtonNext onClick={() => handleSlideNext()} />
       </div>
     </>
   );

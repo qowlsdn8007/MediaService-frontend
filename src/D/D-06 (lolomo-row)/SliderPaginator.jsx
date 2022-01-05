@@ -3,11 +3,9 @@ import { useSelector } from "react-redux";
 import "./lolomo.css";
 
 const SliderPaginator = ({ props }) => {
-  const pageList = Array(props.totalPage).fill(false);
-  const currentSlidePage = useSelector(
-    (state) => state.slider.currentSlidePage
-  );
-  pageList[currentSlidePage] = true;
+  const { totalPage, currentPage } = props;
+  const pageList = Array(totalPage).fill(false);
+  pageList[currentPage - 1] = true;
 
   return (
     <div className="slider-pagination">

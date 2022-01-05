@@ -5,16 +5,22 @@ import "./lolomo.css";
 
 export const SlideButtonPrev = ({ onClick }) => {
   return (
-    <button className="slider-nav-button slider-nav-button--prev">
-      <ArrowBackIosNewIcon onClick={onClick} />
+    <button
+      className="slider-nav-button slider-nav-button--prev"
+      onClick={onClick}
+    >
+      <ArrowBackIosNewIcon />
     </button>
   );
 };
 
 export const SlideButtonNext = ({ onClick }) => {
   return (
-    <button className="slider-nav-button slider-nav-button--next">
-      <ArrowForwardIosIcon onClick={onClick} />
+    <button
+      className="slider-nav-button slider-nav-button--next"
+      onClick={onClick}
+    >
+      <ArrowForwardIosIcon />
     </button>
   );
 };
