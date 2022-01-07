@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const LoginFormMain = () => {
   return (
@@ -12,7 +13,7 @@ const LoginFormMain = () => {
         <input type="checkbox"></input>
         <label>로그인 정보 저장</label>
       </div>
-      <a>도움이 필요하신가요</a>
+      <Link to="/signinhelp">도움이 필요하신가요</Link>
     </div>
   );
 };
