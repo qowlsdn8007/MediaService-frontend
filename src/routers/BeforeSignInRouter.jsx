@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import LoginContainer from "../B/LoginContainer";
+import LoginContainer from "../components/B/LoginContainer";
 
 const BeforeLoginRouter = () => {
   const navigate = useNavigate();

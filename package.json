@@ -68,9 +68,13 @@
     "@storybook/addon-links": "^6.4.8",
     "@storybook/node-logger": "^6.4.8",
     "@storybook/preset-create-react-app": "^3.2.0",
-    "@storybook/react": "^6.4.8"
+    "@storybook/react": "^6.4.8",
+    "msw": "^0.36.3"
   },
   "resolutions": {
     "babel-loader": "8.1.0"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
