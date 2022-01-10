@@ -1,34 +1,36 @@
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import "./App.css";
-import Slider from "./D/D-06 (lolomo-row)/Slider";
-import Data from "./videoData.json"
-import { useDispatch } from 'react-redux';
-import { setMovies } from "./modules/movie.js"
-import LoginContainer from './B/LoginContainer';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import BeforeLoginRouter from './routers/BeforeSignInRouter';
-import AfterLoginRouter from './routers/AfterSignInRouter';
 import LandingPageRouter from './routers/LandingPageRouter';
 import SignUpRouter from './routers/SignUpRouter';
 import SignInHelpRouter from './routers/SignInHelpRouter';
+import Loading from './components/common/Loading';
+import { getCookie, getLocalItem, setLocalItem } from './api/browserStorage';
+import { onCheckedAutoSignIn } from './api/sign';
+const AfterLoginRouter = React.lazy(() => import('./routers/AfterSignInRouter'));
+
 function App() {
-  const { data } = Data;
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setMovies(data))
-  }, []);
+
+  const [autoSignIn, setAutoSignIn] = useState(false);
+  useEffect(() => {  // 처음 앱 시작 시 autoLogin 실행
+    const autoCheck = onCheckedAutoSignIn();
+    setAutoSignIn(autoCheck);
+  }, [autoSignIn]);
+
   return (
     <div className="App" >
       <BrowserRouter>
         <Routes>
+          {autoSignIn && <Route element={<Navigate replace to="/browse" />} />}   {/* path 설정하면 특정 라우팅만 리턴된다... 여러 페이지 리턴시켜줘야하는데.. */}
           <Route index element={<LandingPageRouter />}></Route>
-          <Route path="/login" element={<BeforeLoginRouter />}></Route>
-          <Route path="/browse" element={<AfterLoginRouter />}></Route>
+          <Route path="/signin" element={<BeforeLoginRouter />}></Route>
+          <Route path="/browse" element={<Suspense fallback={<Loading />}><AfterLoginRouter /></Suspense>}></Route>
           <Route path="/signup" element={<SignUpRouter />}></Route>
           <Route path="/signinhelp" element={<SignInHelpRouter />}></Route>
         </Routes>
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 

@@ -1,13 +1,18 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginContainer from "../B/LoginContainer";
+import LoginContainer from "../components/B/LoginContainer";
+import { withAuth } from "../hoc/withAuth";
+import withRedirectAfterSignIn from "../hoc/withRedirectAfterSignIn";
 
 const BeforeLoginRouter = () => {
   const navigate = useNavigate();
-
-  const goToHome = () => {
-    navigate("/");
-  };
+  const accessToken = axios.defaults.headers.common["Authorization"];
+  useEffect(() => {
+    if (accessToken) {
+      navigate("/browse");
+    }
+  }, []);
 
   return (
     <>
@@ -18,4 +23,4 @@ const BeforeLoginRouter = () => {
   );
 };
 
-export default BeforeLoginRouter;
+export default withAuth(BeforeLoginRouter);

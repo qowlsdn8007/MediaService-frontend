@@ -1,12 +1,15 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LandingHeader from "../common/LandingHeader";
+import LandingHeader from "../components/common/LandingHeader";
+import { withAuth } from "../hoc/withAuth";
+import withRedirectAfterSignIn from "../hoc/withRedirectAfterSignIn";
 
 const LandingPageRouter = () => {
   const navigate = useNavigate();
 
   const goToSignIn = () => {
-    navigate("/login");
+    navigate("/signin");
   };
   const goToSignUp = () => {
     navigate("/signup");
@@ -24,4 +27,4 @@ const LandingPageRouter = () => {
   );
 };
 
-export default LandingPageRouter;
+export default withAuth(LandingPageRouter);

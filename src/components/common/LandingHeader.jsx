@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../CI_TmaxEnterprise.png";
+import logo from "../../CI_TmaxEnterprise.png";
 
 const LandingHeader = () => {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ const LandingHeader = () => {
   };
 
   const goToSignIn = () => {
-    navigate("/login");
+    navigate("/signin");
   };
 
   return (
