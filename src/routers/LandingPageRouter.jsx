@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LandingHeader from "../components/common/LandingHeader";
 import { withAuth } from "../hoc/withAuth";
-import withRedirectAfterSignIn from "../hoc/withRedirectAfterSignIn";
 
 const LandingPageRouter = () => {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getCookie, getLocalItem, setLocalItem } from './browserStorage';
+import { getCookie, getLocalItem, setCookie, setLocalItem } from './browserStorage';
 
 const AUTH = "/auth";
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 24 hour
@@ -33,7 +33,12 @@ const onLoginSuccess = res => {
     setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
 };
 
-export const onCheckedAutoSignIn = () => {
+export const onSignOut = () => {
+    axios.defaults.headers.common['Authorization'] = ""; // accessToken 초기화
+    setCookie('refreshToken',"", "-1"); // refreshToken 삭제
+}
+
+/* export const onCheckedAutoSignIn = () => {
     const autoCheck = getLocalItem("autoCheck", false); // false는 default 값
     if (autoCheck) {
       // 이전에 자동 로그인 체크했다면
@@ -46,4 +51,4 @@ export const onCheckedAutoSignIn = () => {
       }
     }
     return false;
-}
+} */

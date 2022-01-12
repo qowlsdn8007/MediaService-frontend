@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginContainer from "../components/B/LoginContainer";
 import { withAuth } from "../hoc/withAuth";
-import withRedirectAfterSignIn from "../hoc/withRedirectAfterSignIn";
 
 const BeforeLoginRouter = () => {
   const navigate = useNavigate();

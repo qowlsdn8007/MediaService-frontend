@@ -5,6 +5,7 @@ import { withAuth } from "../hoc/withAuth";
 import Slider from "../components/D/D-06 (lolomo-row)/Slider";
 import { setMovies } from "../modules/movie";
 import Data from "../videoData.json";
+import MainHeader from "../components/common/MainHeader";
 
 const AfterSignInRouter = () => {
   const { data } = Data;
@@ -12,9 +13,10 @@ const AfterSignInRouter = () => {
   useEffect(() => {
     dispatch(setMovies(data));
   }, []);
+
   return (
     <>
-      <p>로그인 후</p>
+      <MainHeader />
       <Slider />
       <Slider />
       <Slider />
