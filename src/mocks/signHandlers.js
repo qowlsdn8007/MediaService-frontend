@@ -1,6 +1,7 @@
 import { rest } from 'msw';
+import axios from 'axios';
 
-const handlers = [
+const sign_handlers = [
     rest.post('/api/v1/auth/sign-in', (req, res, ctx) => {
 
         const errorCode = req.url.searchParams.get('error_code');
@@ -24,6 +25,19 @@ const handlers = [
             return console.error();
         }
     }),
+    rest.post('/api/v1/auth/sign-up', (req, res, ctx) => {
+        const {email} = req.body;
+        let uuid = "1fb75681-78b6-4339-9edf-d4290128d586";
+        //axios.get('https://www.uuidgenerator.net/api/version4').then(response => uuid = response);
+        return res(
+            ctx.status(200, 'ok'),
+            ctx.json({
+                email: email,
+                id: uuid
+            })
+        );
+    }),
+
     rest.post('/api/v1/auth/silent-refresh', (req, res, ctx) => {
         //const accessToken = req.headers['Authorization'];
         const refreshToken = req.cookies['refreshToken'];
@@ -43,4 +57,4 @@ const handlers = [
     })
 ]
 
-export default handlers;
+export default sign_handlers;

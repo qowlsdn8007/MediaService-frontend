@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { getCookie, getLocalItem, setCookie, setLocalItem } from './browserStorage';
+import { deleteLatestProfile } from './profile';
 
 const AUTH = "/auth";
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 24 hour
@@ -34,8 +36,9 @@ const onLoginSuccess = res => {
 };
 
 export const onSignOut = () => {
-    axios.defaults.headers.common['Authorization'] = ""; // accessToken 초기화
+    axios.defaults.headers.common['Authorization'] = null; // accessToken 초기화
     setCookie('refreshToken',"", "-1"); // refreshToken 삭제
+    deleteLatestProfile();  // 최근 접속한 프로필 삭제
 }
 
 /* export const onCheckedAutoSignIn = () => {

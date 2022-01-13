@@ -1,21 +1,37 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { onSilentRefresh } from "../api/sign";
 import { getCookie } from "../api/browserStorage";
+import { useDispatch } from "react-redux";
+import { getLatestProfileId } from "../api/profile";
+import { setProfileId } from "../modules/profile";
+import NotFound from "../routers/NotFound";
 
 export const withAuth = (Component) => (props) => {
+  const dispatch = useDispatch();
+  const getPid = useCallback(() => {
+    const pid = getLatestProfileId();
+    if (pid !== "") {
+      dispatch(setProfileId(pid));
+    }
+  }, [dispatch]); // 최근 프로필 설정
+
   useEffect(() => {
     const accessToken = axios.defaults.headers.common["Authorization"];
 
     if (!accessToken) {
       const refreshToken = getCookie("refreshToken");
+      console.log(refreshToken);
       if (!refreshToken) {
-        return <p>페이지 권한이 없습니다.</p>;
+        console.log("asdfasdf");
+        return <NotFound />; // 이거 왜  출력 안되냐!@?#!@?#!@?#!@?#!@?#?
       } else {
-        onSilentRefresh();
+        onSilentRefresh(); // 자동 접속
+        getPid(); // 최근 프로필에 맞게 접속, 최근 기록 없으면 선택컴포넌트 출력
       }
     }
-  }, []);
+  }, [getPid]);
+
   // 1. accessToken 유효시 통과
   // 2. accessToken 소실 및 만료시 => refresh Token 존재하면 silentRefresh로 갱신
   // 3. 둘 다 만료 시 접근 불가

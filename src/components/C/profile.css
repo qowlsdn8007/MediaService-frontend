@@ -1,0 +1,18 @@
+@media screen {
+  .profile-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+  }
+
+  .profile-item {
+    position: relative;
+    display: inline-block;
+    padding: 2rem;
+    list-style: none;
+    cursor: pointer;
+  }
+}

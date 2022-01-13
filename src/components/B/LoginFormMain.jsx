@@ -10,7 +10,6 @@ const LoginFormMain = () => {
   const [autoCheck, setAutoCheck] = useState(getLocalItem("autoCheck", false)); // false는 스토리지에 없을 때 기본값
 
   useEffect(() => {
-    console.log(autoCheck);
     if (autoCheck) {
       setLocalItem("autoCheck", true);
     } else {
