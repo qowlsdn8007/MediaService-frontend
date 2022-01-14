@@ -48,7 +48,7 @@ const LoginFormMain = () => {
         <input
           type="checkbox"
           checked={autoCheck}
-          onClick={handleAutoChecked}
+          onChange={handleAutoChecked}
         ></input>
         <label>로그인 정보 저장</label>
       </div>

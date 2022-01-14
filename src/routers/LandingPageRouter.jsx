@@ -25,4 +25,4 @@ const LandingPageRouter = () => {
   );
 };
 
-export default withAuth(LandingPageRouter);
+export default LandingPageRouter;

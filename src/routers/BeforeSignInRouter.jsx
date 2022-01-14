@@ -22,4 +22,4 @@ const BeforeLoginRouter = () => {
   );
 };
 
-export default withAuth(BeforeLoginRouter);
+export default BeforeLoginRouter;

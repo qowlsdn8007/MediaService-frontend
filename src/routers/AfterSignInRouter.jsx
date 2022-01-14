@@ -9,7 +9,7 @@ import axios from "axios";
 import ProfileContainer from "../components/C/ProfileContainer";
 import { getProfiles } from "../api/profile";
 
-const AfterSignInRouter = () => {
+const AfterSignInRouter = ({ isNotFounded }) => {
   const { data } = Data;
   const [profileList, setProfileList] = useState([]);
   const chosenProfileId = useSelector((state) => state.profile.profileId);
