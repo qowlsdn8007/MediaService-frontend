@@ -5,20 +5,24 @@ import Slider from "../components/D/D-06 (lolomo-row)/Slider";
 import { setMovies } from "../modules/movie";
 import Data from "../videoData.json";
 import MainHeader from "../components/common/MainHeader";
-import axios from "axios";
 import ProfileContainer from "../components/C/ProfileContainer";
 import { getProfiles } from "../api/profile";
+import PreviewModal from "../components/D/D-08 (preview-modal)/PreviewModal";
+import { setPreviewModalOpen } from "../modules/uiControl";
 
 const AfterSignInRouter = ({ isNotFounded }) => {
   const { data } = Data;
   const [profileList, setProfileList] = useState([]);
+  const dispatch = useDispatch();
+  const handleOpen = () => {
+    dispatch(setPreviewModalOpen(true));
+  };
+
   const chosenProfileId = useSelector((state) => state.profile.profileId);
   const getProfileList = async () => {
     const list = await getProfiles();
     setProfileList(list);
   };
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setMovies(data));
@@ -29,7 +33,15 @@ const AfterSignInRouter = ({ isNotFounded }) => {
   return (
     <>
       <MainHeader />
-      {chosenProfileId ? <Slider /> : <ProfileContainer list={profileList} />}
+      {chosenProfileId ? (
+        <div>
+          <Slider />
+          <button onClick={handleOpen}>test</button>
+          <PreviewModal />
+        </div>
+      ) : (
+        <ProfileContainer list={profileList} />
+      )}
     </>
   );
 };

@@ -5,7 +5,6 @@ import { getCookie } from "../api/browserStorage";
 import { useDispatch } from "react-redux";
 import { getLatestProfileId } from "../api/profile";
 import { setProfileId } from "../modules/profile";
-import NotFound from "../routers/NotFound";
 import { useNavigate } from "react-router-dom";
 
 //   profileId,  accessToken, refreshToken 확인 및 발행하는 hoc

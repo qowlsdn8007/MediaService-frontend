@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === 'development') {
   const { worker } = require('./mocks/browser');
   worker.start();
 }  //   msw 라이브러리를 사용한 mock-server 구동
-
 export const store = createStore(rootReducer, {}, enhancer);
 
 ReactDOM.render(

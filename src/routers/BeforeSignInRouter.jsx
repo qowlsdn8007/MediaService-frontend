@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginContainer from "../components/B/LoginContainer";
-import { withAuth } from "../hoc/withAuth";
 
 const BeforeLoginRouter = () => {
   const navigate = useNavigate();

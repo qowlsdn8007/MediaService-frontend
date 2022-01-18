@@ -1,4 +1,4 @@
-import React, { SetStateAction, Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import BeforeLoginRouter from './routers/BeforeSignInRouter';
@@ -9,16 +9,13 @@ import Loading from './components/common/Loading';
 //import { onCheckedAutoSignIn } from './api/sign';
 import { getCookie } from './api/browserStorage';
 import SignOutRouter from './routers/SignOutRouter';
-import { useSelector } from 'react-redux';
 import NotFound from './routers/NotFound';
-import AfterSignInRouter from './routers/AfterSignInRouter';
-//const AfterSignInRouter = React.lazy((): any => import('./routers/AfterSignInRouter'));
+const AfterSignInRouter = React.lazy((): any => import('./routers/AfterSignInRouter'));
 
 function App() {
   const [refreshToken, setRefreshToken] = useState(null);
 
   useEffect(() => {
-    console.log("실행확인")
     const token: any = getCookie('refreshToken');
     setRefreshToken(token);
   }, []);
