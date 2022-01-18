@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../../CI_TmaxEnterprise.png";
-import { onSignOut } from "../../api/sign";
+import logo from "CI_TmaxEnterprise.png";
+import { onSignOut } from "api/sign";
 
 const MainHeader = () => {
   const navigate = useNavigate();

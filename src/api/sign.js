@@ -1,45 +1,54 @@
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { getCookie, getLocalItem, setCookie, setLocalItem } from './browserStorage';
-import { deleteLatestProfile } from './profile';
+import axios from "axios";
+import { useSelector } from "react-redux";
+import {
+  getCookie,
+  getLocalItem,
+  setCookie,
+  setLocalItem,
+} from "./browserStorage";
+import { deleteLatestProfile } from "./profile";
 
 const AUTH = "/auth";
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 24 hour
 
 export const onSignIn = async (email, password) => {
-    const data = {
-        email,
-        password,
-    };
-    await axios.post(AUTH + '/sign-in', data).then(res => {
-        const { accessToken } = res.data;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;  // header에 항상 디폴트로 accessToken 설정
-    }).catch(err => {
-        console.log(err);
-        // ERROR 컴포넌트를 보여주든 어찌든 후에 꼭 처리 로직 작성
+  const data = {
+    email,
+    password,
+  };
+  await axios
+    .post(AUTH + "/sign-in", data)
+    .then((res) => {
+      const { accessToken } = res.data;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`; // header에 항상 디폴트로 accessToken 설정
+    })
+    .catch((err) => {
+      console.log(err);
+      // ERROR 컴포넌트를 보여주든 어찌든 후에 꼭 처리 로직 작성
     });
-}
+};
 
 export const onSilentRefresh = () => {
-    axios.post(AUTH + '/silent-refresh')
+  axios
+    .post(AUTH + "/silent-refresh")
     .then(onLoginSuccess)
-    .catch(err => {
-        console.log(err);
-        //로직 작성
-    })
-}
+    .catch((err) => {
+      console.log(err);
+      //로직 작성
+    });
+};
 
-const onLoginSuccess = res => {
-    const { accessToken } = res.data;
-    axios.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-    setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
+const onLoginSuccess = (res) => {
+  const { accessToken } = res.data;
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
 };
 
 export const onSignOut = () => {
-    axios.defaults.headers.common['Authorization'] = null; // accessToken 초기화
-    setCookie('refreshToken',"", "-1"); // refreshToken 삭제
-    deleteLatestProfile();  // 최근 접속한 프로필 삭제
-}
+  axios.defaults.headers.common["Authorization"] = null; // accessToken 초기화
+  setCookie("refreshToken", "", "-1"); // refreshToken 삭제
+  deleteLatestProfile(); // 최근 접속한 프로필 삭제
+};
 
 /* export const onCheckedAutoSignIn = () => {
     const autoCheck = getLocalItem("autoCheck", false); // false는 default 값

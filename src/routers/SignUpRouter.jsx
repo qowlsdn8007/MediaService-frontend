@@ -1,9 +1,10 @@
 import React from "react";
+import SignUpContainer from "components/B/signUp/SIgnUpContainer";
 
 const SignUpRouter = () => {
   return (
     <>
-      <p>사인업</p>
+      <SignUpContainer />
     </>
   );
 };

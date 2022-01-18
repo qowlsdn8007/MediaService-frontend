@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLatestProfile } from "../../api/profile";
-import { setProfileId } from "../../modules/profile";
+import { setLatestProfile } from "api/profile";
+import { setProfileId } from "modules/profile";
 import "./profile.css";
 
 const ProfileList = ({ list }) => {
@@ -11,7 +11,7 @@ const ProfileList = ({ list }) => {
       setLatestProfile(id); // 로컬스토리지에 접속하는 프로필 저장
       dispatch(setProfileId(id)); // redux profileId 갱신
     },
-    [dispatch]
+    [dispatch],
   );
 
   return (

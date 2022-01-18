@@ -1,10 +1,10 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { onSilentRefresh } from "../api/sign";
-import { getCookie } from "../api/browserStorage";
+import { onSilentRefresh } from "api/sign";
+import { getCookie } from "api/browserStorage";
 import { useDispatch } from "react-redux";
-import { getLatestProfileId } from "../api/profile";
-import { setProfileId } from "../modules/profile";
+import { getLatestProfileId } from "api/profile";
+import { setProfileId } from "modules/profile";
 import { useNavigate } from "react-router-dom";
 
 //   profileId,  accessToken, refreshToken 확인 및 발행하는 hoc

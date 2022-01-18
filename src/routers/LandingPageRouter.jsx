@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import LandingHeader from "../components/common/LandingHeader";
-import { withAuth } from "../hoc/withAuth";
+import LandingHeader from "components/common/LandingHeader";
 
 const LandingPageRouter = () => {
   const navigate = useNavigate();

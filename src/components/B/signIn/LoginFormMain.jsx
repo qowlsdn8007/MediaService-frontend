@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { onSignIn } from "../../api/sign";
-import { getLocalItem, setLocalItem } from "../../api/browserStorage";
+import { onSignIn } from "api/sign";
+import { getLocalItem, setLocalItem } from "api/browserStorage";
 const LoginFormMain = () => {
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
