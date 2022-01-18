@@ -1,7 +1,7 @@
 import React from "react";
 import { Dialog, DialogContent, Modal } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { setPreviewModalOpen } from "../../../modules/uiControl";
+import { setPreviewModalOpen } from "modules/uiControl";
 import PreviewModalTrack from "./PreviewModalTrack";
 import PreviewModalInfo from "./PreviewModalInfo";
 

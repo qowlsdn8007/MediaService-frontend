@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import SignOutContainer from "../components/B/SignOutContainer";
-import LandingHeader from "../components/common/LandingHeader";
+import SignOutContainer from "components/B/signOut/SignOutContainer";
+import LandingHeader from "components/common/LandingHeader";
 const SignOutRouter = () => {
   const navigate = useNavigate();
   const goToHome = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import LandingHeader from "../components/common/LandingHeader";
-import { withAuth } from "../hoc/withAuth";
+import LandingHeader from "components/common/LandingHeader";
+import LandinagPageContainer from "components/A/LandingPageContainer";
 
 const LandingPageRouter = () => {
   const navigate = useNavigate();
@@ -16,11 +16,7 @@ const LandingPageRouter = () => {
   return (
     <>
       <LandingHeader />
-      <p>랜딩페이지</p>
-      <div>
-        <input />
-        <button onClick={goToSignUp}>시작하기</button>
-      </div>
+      <LandinagPageContainer />
     </>
   );
 };

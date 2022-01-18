@@ -1,9 +1,10 @@
+import SignInHelpContainer from "components/B/signInHelp/SignInHelpContainer";
 import React from "react";
 
 const SignInHelpRouter = () => {
   return (
     <>
-      <p>비밀번호찾기</p>
+      <SignInHelpContainer />
     </>
   );
 };

@@ -15,4 +15,11 @@
     list-style: none;
     cursor: pointer;
   }
+
+  .profile-update {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

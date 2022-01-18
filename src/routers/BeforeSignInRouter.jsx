@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginContainer from "../components/B/LoginContainer";
+import LoginContainer from "components/B/signIn/LoginContainer";
 
 const BeforeLoginRouter = () => {
   const navigate = useNavigate();

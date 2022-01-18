@@ -10,6 +10,7 @@ import Loading from './components/common/Loading';
 import { getCookie } from './api/browserStorage';
 import SignOutRouter from './routers/SignOutRouter';
 import NotFound from './routers/NotFound';
+import ManageProfileRouter from "routers/ManageProfileRouter";
 const AfterSignInRouter = React.lazy((): any => import('./routers/AfterSignInRouter'));
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/signup" element={<SignUpRouter />}></Route>
           <Route path="/signinhelp" element={<SignInHelpRouter />}></Route>
           <Route path="/signout" element={<SignOutRouter />}></Route>
+          <Route path="/manageProfile" element={<ManageProfileRouter />}></Route>
           <Route path="/notfound" element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
