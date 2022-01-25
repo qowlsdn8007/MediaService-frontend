@@ -27,7 +27,6 @@ export const onSignIn = async (email, password) => {
       // ERROR 컴포넌트를 보여주든 어찌든 후에 꼭 처리 로직 작성
     });
 };
-
 export const onSilentRefresh = async () => {
   await axios
     .get(AUTH + "/silent-refresh")
