@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "CI_TmaxEnterprise.png";
+<<<<<<< HEAD
 import { Button } from "@mui/material";
+=======
+>>>>>>> 2228fef33a343399823dddc3ee7d61906ca5972e
 
 const LandingHeader = () => {
   const navigate = useNavigate();
