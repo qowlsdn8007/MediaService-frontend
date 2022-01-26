@@ -60,17 +60,21 @@ const sign_handlers = [
       return console.error();
     }
   }),
+
+  rest.post("/api/v1/auth/email", (req, res, ctx) => {
+
+    const errorCode = req.url.searchParams.get("error_code");
+      if (errorCode) {
+        console.log(errorCode);
+        return res(ctx.status(errorCode));
+      }
+    // const email = req.url.searchParams.get("id");
+    const { email } = req.body;
+    const result =
+      email === "test@test.com"
+        ? res(ctx.status(200, "ok"), ctx.json({ email: "email" }))
+        : res(ctx.status(404, "not found!@!"), ctx.json({ email: "email" }));
+    return result;
+  }),
 ];
-
-rest.post("/api/v1/auth/email", (req, res, ctx) => {
-  // const email = req.url.searchParams.get("id");
-  const { email } = req.body;
-  console.log(email);
-  const result =
-    email === "test@test.com"
-      ? res(ctx.status(200, "ok"), ctx.json({ email: "email" }))
-      : res(ctx.status(404, "not found!@!"), ctx.json({ email: "email" }));
-  return result;
-});
-
 export default sign_handlers;

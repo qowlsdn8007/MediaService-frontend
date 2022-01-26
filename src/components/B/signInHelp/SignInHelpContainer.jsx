@@ -1,6 +1,5 @@
 import { Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
-<<<<<<< HEAD
 import React, { useState } from "react";
 
 const SignInHelpContainer = () => {
@@ -8,11 +7,6 @@ const SignInHelpContainer = () => {
   const [isEmail, setIsEmail] = useState(false);
   const handleFIndPassword = () => {};
 
-=======
-import React from "react";
-
-const SignInHelpContainer = () => {
->>>>>>> 2228fef33a343399823dddc3ee7d61906ca5972e
   return (
     <Box>
       <h1>비밀번호를 잊으셨나요?</h1>
@@ -23,7 +17,6 @@ const SignInHelpContainer = () => {
           <TextField placeholder="example@example.com" />
         </div>
         <div>
-<<<<<<< HEAD
           <Button variant="contained" onClick={handleFIndPassword}>
             이메일로 받기
           </Button>
@@ -36,10 +29,6 @@ const SignInHelpContainer = () => {
           ) : (
             <b style={{ color: "red" }}>존재하지 않는 이메일입니다.</b>
           ))}
-=======
-          <Button variant="contained">이메일로 받기</Button>
-        </div>
->>>>>>> 2228fef33a343399823dddc3ee7d61906ca5972e
       </div>
     </Box>
   );

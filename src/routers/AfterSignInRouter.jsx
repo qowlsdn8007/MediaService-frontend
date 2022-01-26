@@ -6,16 +6,10 @@ import { setMovies } from "modules/movie";
 import Data from "videoData.json";
 import MainHeader from "components/common/MainHeader";
 import ProfileContainer from "components/C/ProfileContainer";
-<<<<<<< HEAD
 import { getProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
 import { setPreviewModalOpen } from "modules/uiControl";
 import { setProfileId } from "modules/profile";
-=======
-import { getProfiles } from "api/profile";
-import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
-import { setPreviewModalOpen } from "modules/uiControl";
->>>>>>> 2228fef33a343399823dddc3ee7d61906ca5972e
 
 const AfterSignInRouter = ({ isNotFounded }) => {
   const { data } = Data;

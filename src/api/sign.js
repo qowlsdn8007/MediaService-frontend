@@ -28,15 +28,9 @@ export const onSignIn = async (email, password) => {
     });
 };
 
-<<<<<<< HEAD
 export const onSilentRefresh = async () => {
   await axios
     .get(AUTH + "/silent-refresh")
-=======
-export const onSilentRefresh = () => {
-  axios
-    .post(AUTH + "/silent-refresh")
->>>>>>> 2228fef33a343399823dddc3ee7d61906ca5972e
     .then(onLoginSuccess)
     .catch((err) => {
       console.log(err);
@@ -70,16 +64,13 @@ export const onSignOut = () => {
     }
     return false;
 } */
-<<<<<<< HEAD
 
 export const emailCheck = async (email) => {
-  const result = null;
+  let result = null;
   await axios
-    .post(AUTH + "/email", email)
+    .post(AUTH + "/email", {email})
     .then((res) => (result = res.status === 200 ? true : false))
     .catch((err) => console.log(err));
 
   return result;
 };
-=======
->>>>>>> 2228fef33a343399823dddc3ee7d61906ca5972e
