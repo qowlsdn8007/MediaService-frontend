@@ -2,31 +2,45 @@ import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { validateEmail, validatePassword } from "api/validation";
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import AuthNumChecker from "./AuthNumChecker";
 
 const SignUpContainer = () => {
   const [agree, SetAgree] = useState(false);
   const handleChecked = useCallback(() => {
     SetAgree(!agree);
-  });
+  }, [agree]);
   const [email, setEmail] = useState("");
   const [errEmail, setErrEmail] = useState(false);
   const [pw, setPw] = useState("");
   const [errPw, setErrPw] = useState(false);
+  const [checkAuthNum, setCheckAuthNum] = useState(false);
   const { state } = useLocation();
 
+  console.log(agree, errEmail, errPw);
   useEffect(() => {
     state && setEmail(state);
     console.log(state);
   }, [state]);
 
-  const handleEmail = useCallback((text) => {
-    setEmail(text);
-    setErrEmail(validateEmail(text));
-  }, []);
-  const handlePw = useCallback((text) => {
-    setPw(text);
-    setErrPw(validatePassword(text));
-  }, []);
+  const handleEmail = useCallback(
+    (text) => {
+      setEmail(text);
+      setErrEmail(validateEmail(text));
+    },
+    [setEmail, setErrEmail],
+  );
+
+  const handlePw = useCallback(
+    (text) => {
+      setPw(text);
+      setErrPw(validatePassword(text));
+    },
+    [setPw, setErrPw],
+  );
+
+  const handleAgree = () => {
+    setCheckAuthNum(true);
+  };
 
   return (
     <>
@@ -75,9 +89,14 @@ const SignUpContainer = () => {
             control={<Checkbox />}
           />
         </div>
-        <Button variant="contained" disabled={!agree || errEmail || errPw}>
+        <Button
+          variant="contained"
+          disabled={!(agree && !errEmail && !errPw)}
+          onClick={handleAgree}
+        >
           동의하고 계속하기
         </Button>
+        {checkAuthNum && <AuthNumChecker />}
       </div>
     </>
   );
