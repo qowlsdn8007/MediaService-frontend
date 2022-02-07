@@ -3,18 +3,25 @@ import React, { useCallback, useEffect, useState } from "react";
 import { onSilentRefresh } from "api/sign";
 import { getCookie } from "api/browserStorage";
 import { useDispatch } from "react-redux";
-import { getLatestProfileId } from "api/profile";
-import { setProfileId } from "modules/profile";
+import { getLatestProfileId, getProfile } from "api/profile";
+import { setProfile } from "modules/profile";
 import { useNavigate } from "react-router-dom";
 
 //   profileId,  accessToken, refreshToken 확인 및 발행하는 hoc
 export const withAuth = (Component) => (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const getPid = useCallback(() => {
+
+  const getLatestProfile = async (id) => {
+    const response = await getProfile(id);
+    return response;
+  };
+
+  const getPid = useCallback(async () => {
     const pid = getLatestProfileId();
     if (pid !== "") {
-      dispatch(setProfileId(pid));
+      const latestProfile = await getLatestProfile(pid);
+      dispatch(setProfile(latestProfile));
     }
   }, [dispatch]); // 최근 프로필 설정
 

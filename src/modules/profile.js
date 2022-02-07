@@ -1,26 +1,40 @@
 import { createAction, handleActions } from "redux-actions";
 
-const SETPROFILEID = "profile/SETPROFILEID";
+const SETPROFILE = "profile/SETPROFILEID";
 const SETPROFILEIDFOREDIT = "profile/SETPROFILEIDFOREDIT";
 const SETPROFILEMANAGETYPE = "profile/SETPROFILEMANAGETYPE";
+const SETPROFILEAVATORANCHOR = "profile/SETPROFILEAVATORANCHOR";
 
-export const setProfileId = createAction(SETPROFILEID);
+export const setProfile = createAction(SETPROFILE);
 export const setProfileIdForEdit = createAction(SETPROFILEIDFOREDIT);
 export const setProfileManageType = createAction(SETPROFILEMANAGETYPE);
+export const setProfileAvatarAnchor = createAction(SETPROFILEAVATORANCHOR);
 
 const initialState = {
-  profileId: "",
+  currentProfile: null,
   profileIdForEdit: "",
   proflieManageType: "default",
+
+  profileAvatarAnchor: null,
 };
 const profile = handleActions(
   {
-    [SETPROFILEID]: (state, { payload: profileId }) => ({ profileId }),
+    // 불변성 유지해주어야해
+    [SETPROFILE]: (state, { payload: currentProfile }) => ({
+      ...state,
+      currentProfile,
+    }),
     [SETPROFILEIDFOREDIT]: (state, { payload: profileIdForEdit }) => ({
+      ...state,
       profileIdForEdit,
     }),
     [SETPROFILEMANAGETYPE]: (state, { payload: profileManageType }) => ({
+      ...state,
       profileManageType,
+    }),
+    [SETPROFILEAVATORANCHOR]: (state, { payload: profileAvatarAnchor }) => ({
+      ...state,
+      profileAvatarAnchor,
     }),
   },
   initialState,
