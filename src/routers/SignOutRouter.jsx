@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SignOutContainer from "components/B/signOut/SignOutContainer";
 import LandingHeader from "components/common/LandingHeader";
