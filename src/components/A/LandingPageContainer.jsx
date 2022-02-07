@@ -10,14 +10,15 @@ const LandinagPageContainer = () => {
 
   const navigate = useNavigate();
 
-  const goToSignIn = () => {
+  const goToSignIn = useCallback(() => {
     navigate("/signin");
-  };
-  const goToSignUp = () => {
-    navigate("/signup");
-  };
+  }, [navigate]);
+ 
+  const goToSignUp = useCallback(email => {
+    return navigate("/signup", {state: email});
+  },[navigate]);
 
-  const handleInput = (text) => {
+  const handleEmail = (text) => {
     setEmail(text);
     setErrText(validateEmail(text));
   };
@@ -27,10 +28,10 @@ const LandinagPageContainer = () => {
       email &&
         !errText &&
         (await emailCheck(email).then((res) =>
-          res ? goToSignIn() : goToSignUp(),
+          res ? goToSignIn() : goToSignUp(email),
         ));
     },
-    [email],
+    [errText, goToSignIn, goToSignUp],
   );
 
   return (
@@ -48,7 +49,7 @@ const LandinagPageContainer = () => {
           id="email"
           variant="filled"
           label="이메일 주소"
-          onChange={(e) => handleInput(e.target.value)}
+          onChange={(e) => handleEmail(e.target.value)}
           helperText={
             email &&
             errText && (

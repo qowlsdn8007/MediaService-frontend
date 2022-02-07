@@ -65,9 +65,9 @@ export const onSignOut = () => {
 } */
 
 export const emailCheck = async (email) => {
-  const result = null;
+  let result = null;
   await axios
-    .post(AUTH + "/email", email)
+    .post(AUTH + "/email", { email })
     .then((res) => (result = res.status === 200 ? true : false))
     .catch((err) => console.log(err));
 
