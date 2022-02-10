@@ -6,10 +6,10 @@ import { setMovies } from "modules/movie";
 import Data from "videoData.json";
 import MainHeader from "components/common/MainHeader";
 import ProfileContainer from "components/C/ProfileContainer";
-import { getProfiles, setLatestProfile } from "api/profile";
+import { getProfile, getProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
 import { setPreviewModalOpen } from "modules/uiControl";
-import { setProfileId } from "modules/profile";
+import { setProfile } from "modules/profile";
 
 const AfterSignInRouter = ({ isNotFounded }) => {
   const { data } = Data;
@@ -21,13 +21,13 @@ const AfterSignInRouter = ({ isNotFounded }) => {
   };
 
   const handleProfileChosen = useCallback(
-    (id) => {
-      setLatestProfile(id); // 로컬스토리지에 접속하는 프로필 저장
-      dispatch(setProfileId(id)); // redux profileId 갱신
+    (profile) => {
+      setLatestProfile(profile.id); // 로컬스토리지에 접속하는 프로필 저장
+      dispatch(setProfile(profile)); // redux profile 갱신
     },
     [dispatch],
   );
-  const chosenProfileId = useSelector((state) => state.profile.profileId);
+  const chosenProfile = useSelector((state) => state.profile.currentProfile);
   const getProfileList = async () => {
     const list = await getProfiles();
     setProfileList(list);
@@ -41,7 +41,7 @@ const AfterSignInRouter = ({ isNotFounded }) => {
   return (
     <>
       <MainHeader />
-      {chosenProfileId ? (
+      {chosenProfile ? (
         <div>
           <Slider />
           <button onClick={handleOpen}>test</button>
@@ -50,7 +50,7 @@ const AfterSignInRouter = ({ isNotFounded }) => {
       ) : (
         <ProfileContainer
           list={profileList}
-          title="넷플릭스를 시청할 프로필을 선택하세요."
+          title="티맥스를 시청할 프로필을 선택하세요."
           btnName="프로필 관리"
           onClick={handleProfileChosen}
         />

@@ -19,7 +19,7 @@ const ProfileList = ({ list, type, onClick }) => {
   return (
     <ul className="profile-list">
       {list.map((data) => (
-        <li className="profile-item" onClick={() => onClick(data.id)}>
+        <li className="profile-item" onClick={() => onClick(data)}>
           <div>
             <img
               style={{ borderRadius: "1rem" }}

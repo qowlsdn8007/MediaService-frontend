@@ -14,11 +14,10 @@ const SignUpContainer = () => {
   const [pw, setPw] = useState("");
   const [errPw, setErrPw] = useState(false);
   const [checkAuthNum, setCheckAuthNum] = useState(false);
-  const { state } = useLocation();
+  const { state } = useLocation(); //  랜딩페이지에서 전달받은 이메일
 
   useEffect(() => {
     state && setEmail(state);
-    console.log(state);
   }, [state]);
 
   const handleEmail = useCallback(
