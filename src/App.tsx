@@ -12,9 +12,13 @@ import SignOutRouter from "./routers/SignOutRouter";
 import NotFound from "./routers/NotFound";
 import ManageProfileRouter from "routers/ManageProfileRouter";
 import AccountManageRouter from "routers/AccountManageRouter";
+import {QueryClient, QueryClientProvider }  from"react-query";
+import {ReactQueryDevtools } from 'react-query/devtools'
 const AfterSignInRouter = React.lazy(
   (): any => import("./routers/AfterSignInRouter"),
 );
+
+const queryClient = new QueryClient();
 
 function App() {
   const [refreshToken, setRefreshToken] = useState(null);
@@ -31,10 +35,11 @@ function App() {
   }, [autoSignIn]); */ // 로그인 저장 기능 보류, 넷플릭스에서는 체크와 관계없이 자동로그인
 
   return (
+    <QueryClientProvider client={queryClient}>
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route
+          <Route      
             index
             element={
               refreshToken ? (
@@ -74,6 +79,8 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

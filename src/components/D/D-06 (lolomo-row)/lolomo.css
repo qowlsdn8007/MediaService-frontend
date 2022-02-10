@@ -1,78 +1,73 @@
 .container {
-  display: flex;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
+    width: 100%;
+    position: absolute;
 }
 
 .slider-items {
-  display: flex;
-  position: relative;
-  width: 100%;
-  overflow-x: visible;
+    display: flex;
+    position: relative;
+    width: 100%;
 }
 
 .item {
-  background-color: black;
-  flex: 0 0 16%;
+    flex: 0 0 16%;
+    overflow: visible;
 }
 
 .sub-item {
-  display: none;
+    display: none;
+}
+.sub-item-hover {
+    overflow: visible;
 }
 .container .item:focus,
 .container .item:hover {
-  transform: scale(1.5);
-  transition: transform 300ms ease 100ms;
-  z-index: 1;
-}
-
-.item:hover .sub-item {
-  display: inline;
-  overflow: hidden;
+    transform: scale(1.5);
+    transition: transform 300ms ease 100ms;
+    z-index: 1;
 }
 
 .slider-pagination-page {
-  background-color: #ffffff;
-  display: inline-block;
-  height: 2px;
-  opacity: 0.3;
-  transition: opacity 0.3s;
-  width: 20px;
+    background-color: #ffffff;
+    display: inline-block;
+    height: 2px;
+    opacity: 0.3;
+    transition: opacity 0.3s;
+    width: 20px;
 }
 .slider-pagination-page + .slider-pagination-page {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 .slider-pagination-page--active {
-  opacity: 1;
+    opacity: 1;
 }
 
 .slider-block--header {
-  align-items: center;
-  display: flex;
-  padding: 20px 60px;
-  justify-content: space-between;
+    align-items: center;
+    display: flex;
+    padding: 20px 60px;
+    justify-content: space-between;
 }
 
 .slider-nav-button {
-  -webkit-apparence: none;
-  background: rgba(0, 0, 0, 0.33);
-  border: 0;
-  bottom: 0;
-  color: #ffffff;
-  cursor: pointer;
-  position: absolute;
-  top: 0;
-  z-index: 1;
-  width: 60px;
-  height: 100%;
+    -webkit-apparence: none;
+    background: rgba(0, 0, 0, 0.33);
+    border: 0;
+    bottom: 0;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    width: 60px;
+    height: 100%;
 }
 
 .slider-nav-button--prev {
-  left: 0;
+    left: 0;
 }
 
 .slider-nav-button--next {
-  right: 0;
+    right: 0;
 }
