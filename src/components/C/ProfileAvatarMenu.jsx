@@ -13,8 +13,8 @@ const ProfileAvatarMenu = ({ profileList }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const anchor = useSelector((state) => state.profile.profileAvatarAnchor);
-  const handleCloseMenu = () => {
-    dispatch(setProfileAvatarAnchor(null));
+  const handleCloseMenu = async () => {
+    await dispatch(setProfileAvatarAnchor(null));
   };
 
   const goToSignOut = () => {
@@ -25,8 +25,13 @@ const ProfileAvatarMenu = ({ profileList }) => {
     goToSignOut();
   };
 
-  const goToManageAccount = () => {
+  const goToManageAccount = async () => {
     navigate("/yourAccount");
+  };
+
+  const handleGoToManageAccount = () => {
+    handleCloseMenu();
+    goToManageAccount();
   };
 
   const switchProfile = useCallback(async (id) => {
@@ -35,7 +40,7 @@ const ProfileAvatarMenu = ({ profileList }) => {
     await dispatch(setProfile(profile));
     handleCloseMenu(); // 메뉴창 꺼지도록
   }, []);
-
+  console.log(anchor);
   return (
     <Menu
       open={Boolean(anchor)}
@@ -58,7 +63,7 @@ const ProfileAvatarMenu = ({ profileList }) => {
         </MenuItem>
       ))}
       <Divider />
-      <MenuItem onClick={goToManageAccount}>
+      <MenuItem onClick={handleGoToManageAccount}>
         <PermIdentityIcon />
         <Typography variant="string"> 계정</Typography>
       </MenuItem>

@@ -28,7 +28,7 @@ const ProfileHeaderContainer = () => {
 
   return (
     <Box>
-      <ProfileAvatar onMouseEnter={handleOpenMenu} profile={currentProfile} />
+      <ProfileAvatar onClick={handleOpenMenu} profile={currentProfile} />
       <ProfileAvatarMenu profileList={profileList} />
     </Box>
   );
