@@ -1,6 +1,6 @@
 .container {
     width: 100%;
-    position: absolute;
+    position: relative;
 }
 
 .slider-items {
@@ -12,6 +12,7 @@
 .item {
     flex: 0 0 16%;
     overflow: visible;
+    margin-left: 0.1%;
 }
 
 .sub-item {
@@ -20,8 +21,8 @@
 .sub-item-hover {
     overflow: visible;
 }
-.container .item:focus,
-.container .item:hover {
+.slider-items .item:focus,
+.slider-items .item:hover {
     transform: scale(1.5);
     transition: transform 300ms ease 100ms;
     z-index: 1;

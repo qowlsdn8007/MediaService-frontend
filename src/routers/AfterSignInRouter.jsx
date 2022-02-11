@@ -12,51 +12,51 @@ import { setPreviewModalOpen } from "modules/uiControl";
 import { setProfile } from "modules/profile";
 
 const AfterSignInRouter = ({ isNotFounded }) => {
-  const { data } = Data;
-  const [profileList, setProfileList] = useState([]);
-  const dispatch = useDispatch();
+    const { data } = Data;
+    const [profileList, setProfileList] = useState([]);
+    const dispatch = useDispatch();
 
-  const handleOpen = () => {
-    dispatch(setPreviewModalOpen(true));
-  };
+    const handleOpen = () => {
+        dispatch(setPreviewModalOpen(true));
+    };
 
-  const handleProfileChosen = useCallback(
-    (profile) => {
-      setLatestProfile(profile.id); // 로컬스토리지에 접속하는 프로필 저장
-      dispatch(setProfile(profile)); // redux profile 갱신
-    },
-    [dispatch],
-  );
-  const chosenProfile = useSelector((state) => state.profile.currentProfile);
-  const getProfileList = async () => {
-    const list = await getProfiles();
-    setProfileList(list);
-  };
+    const handleProfileChosen = useCallback(
+        (profile) => {
+            setLatestProfile(profile.id); // 로컬스토리지에 접속하는 프로필 저장
+            dispatch(setProfile(profile)); // redux profile 갱신
+        },
+        [dispatch],
+    );
+    const chosenProfile = useSelector((state) => state.profile.currentProfile);
+    const getProfileList = async () => {
+        const list = await getProfiles();
+        setProfileList(list);
+    };
 
-  useEffect(() => {
-    dispatch(setMovies(data));
-    getProfileList();
-  }, [dispatch, data]);
+    useEffect(() => {
+        dispatch(setMovies(data));
+        getProfileList();
+    }, [dispatch, data]);
 
-  return (
-    <>
-      <MainHeader />
-      {chosenProfile ? (
-        <div>
-          <Slider />
-          <button onClick={handleOpen}>test</button>
-          <PreviewModal />
-        </div>
-      ) : (
-        <ProfileContainer
-          list={profileList}
-          title="티맥스를 시청할 프로필을 선택하세요."
-          btnName="프로필 관리"
-          onClick={handleProfileChosen}
-        />
-      )}
-    </>
-  );
+    return (
+        <>
+            <MainHeader />
+            {chosenProfile ? (
+                <div>
+                    <Slider />
+                    <button onClick={handleOpen}>test</button>
+                    <PreviewModal />
+                </div>
+            ) : (
+                <ProfileContainer
+                    list={profileList}
+                    title="티맥스를 시청할 프로필을 선택하세요."
+                    btnName="프로필 관리"
+                    onClick={handleProfileChosen}
+                />
+            )}
+        </>
+    );
 };
 
 export default withAuth(AfterSignInRouter);
