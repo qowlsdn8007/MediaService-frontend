@@ -15,11 +15,6 @@ const AfterSignInRouter = ({ isNotFounded }) => {
     const { data } = Data;
     const [profileList, setProfileList] = useState([]);
     const dispatch = useDispatch();
-
-    const handleOpen = () => {
-        dispatch(setPreviewModalOpen(true));
-    };
-
     const handleProfileChosen = useCallback(
         (profile) => {
             setLatestProfile(profile.id); // 로컬스토리지에 접속하는 프로필 저장
@@ -44,7 +39,6 @@ const AfterSignInRouter = ({ isNotFounded }) => {
             {chosenProfile ? (
                 <div>
                     <Slider />
-                    <button onClick={handleOpen}>test</button>
                     <PreviewModal />
                 </div>
             ) : (

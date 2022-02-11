@@ -1,4 +1,5 @@
 import { createAction, handleActions } from "redux-actions";
+import { produce } from "immer";
 
 const SETPROFILE = "profile/SETPROFILEID";
 const SETPROFILEIDFOREDIT = "profile/SETPROFILEIDFOREDIT";
@@ -20,25 +21,22 @@ const initialState = {
 const profile = handleActions(
     {
         // 불변성 유지해주어야해
-        [SETPROFILE]: (state, { payload: currentProfile }) => ({
-            ...state,
-            currentProfile,
-        }),
-        [SETPROFILEIDFOREDIT]: (state, { payload: profileIdForEdit }) => ({
-            ...state,
-            profileIdForEdit,
-        }),
-        [SETPROFILEMANAGETYPE]: (state, { payload: profileManageType }) => ({
-            ...state,
-            profileManageType,
-        }),
-        [SETPROFILEAVATORANCHOR]: (
-            state,
-            { payload: profileAvatarAnchor },
-        ) => ({
-            ...state,
-            profileAvatarAnchor,
-        }),
+        [SETPROFILE]: (state, { payload: currentProfile }) =>
+            produce(state, (draft) => {
+                draft.currentProfile = currentProfile;
+            }),
+        [SETPROFILEIDFOREDIT]: (state, { payload: profileIdForEdit }) =>
+            produce(state, (draft) => {
+                draft.profileIdForEdit = profileIdForEdit;
+            }),
+        [SETPROFILEMANAGETYPE]: (state, { payload: profileManageType }) =>
+            produce(state, (draft) => {
+                draft.profileManageType = profileManageType;
+            }),
+        [SETPROFILEAVATORANCHOR]: (state, { payload: profileAvatarAnchor }) =>
+            produce(state, (draft) => {
+                draft.profileAvatarAnchor = profileAvatarAnchor;
+            }),
     },
     initialState,
 );
