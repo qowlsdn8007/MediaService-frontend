@@ -32,7 +32,7 @@ const TitleCard = ({ movie, itemsPerPage }) => {
             {content ? (
                 <Card
                     sx={{
-                        backgroundColor: "black",
+                        backgroundColor: "#141414",
                         width: "10%",
                         height: "5%",
                         objectFit: "cover",

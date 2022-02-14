@@ -1,0 +1,40 @@
+.login-container {
+    height: 80vh;
+    width: 100%;
+    background: radial-gradient(transparent 50%, black),
+        url("https://assets.nflxext.com/ffe/siteui/vlv3/6dea7743-5586-45d1-89a2-9569b1bb0340/79c3c9e6-9da9-4265-9e1e-c4ae6d0fbf2c/KR-ko-20220207-popsignuptwoweeks-perspective_alpha_website_small.jpg");
+    background-size: cover;
+}
+
+.login-container .loginform {
+    background-color: rgba(0, 0, 0, 0.825);
+    margin: 5% 30%;
+    padding: 2% 5%;
+}
+
+.login-container .loginform .loginform-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container .loginform .text {
+    text-align: left;
+    color: white;
+}
+
+.login-container .loginform .sub-text {
+    color: #b3b3b3;
+}
+
+.login-container .loginform .input {
+    margin-bottom: 2vh;
+    background-color: #333;
+    border-radius: 10px;
+}
+
+.login-container .loginform .button {
+    margin-top: 4vh;
+    border-radius: 7px;
+    background-color: #e50914;
+    height: 6vh;
+}

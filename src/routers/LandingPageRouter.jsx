@@ -3,12 +3,11 @@ import LandingHeader from "components/common/LandingHeader";
 import LandinagPageContainer from "components/A/LandingPageContainer";
 
 const LandingPageRouter = () => {
-  return (
-    <>
-      <LandingHeader />
-      <LandinagPageContainer />
-    </>
-  );
+    return (
+        <>
+            <LandinagPageContainer />
+        </>
+    );
 };
 
 export default LandingPageRouter;

@@ -3,12 +3,12 @@ import MainHeader from "components/common/MainHeader";
 import React from "react";
 
 const AccountManageRouter = () => {
-  return (
-    <>
-      <MainHeader />
-      <AccountManageContainer />
-    </>
-  );
+    return (
+        <>
+            <MainHeader />
+            <AccountManageContainer />
+        </>
+    );
 };
 
 export default AccountManageRouter;
