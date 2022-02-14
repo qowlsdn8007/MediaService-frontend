@@ -18,49 +18,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { cardHover } from "modules/card";
 import { Collapse } from "@mui/material";
 import { setMovieData, setPreviewModalOpen } from "modules/uiControl";
+import TitleCardInfo from "./TitleCardInfo";
 
 const TitleCard = ({ movie, itemsPerPage }) => {
     const isCardHover = useSelector((state) => state.card.cardHover);
     const dispatch = useDispatch();
-    const isModalOpen = useSelector((state) => state.uiControl.reviewModalOpen);
-    const handleModalOpen = () => {
-        dispatch(setMovieData(movie));
-        dispatch(setPreviewModalOpen(true));
-    };
-
     const onHover = () => {
         dispatch(cardHover(movie.id));
     };
-    console.log(isCardHover, movie.id);
     const content = isCardHover === movie.id;
     return (
         <>
             {content ? (
                 <Card
-                    onClick={handleModalOpen}
                     sx={{
                         backgroundColor: "black",
-                        maxHeight: 250,
-                        maxWidth: 350,
+                        width: "10%",
+                        height: "5%",
                         objectFit: "cover",
                     }}
                     className="item"
                     onMouseEnter={onHover}
                     onMouseLeave={() => dispatch(cardHover(null))}
                 >
-                    <CardMedia
-                        component="img"
-                        image={movie.thumbnail}
-                        style={{ height: 150, objectFit: "fill" }}
-                    />
-                    <CardContent>asdfasdfasdf</CardContent>
+                    <CardMedia component="img" image={movie.thumbnail} />
+                    <CardContent>
+                        <TitleCardInfo movie={movie} />
+                    </CardContent>
                 </Card>
             ) : (
                 <Card
                     sx={{
                         backgroundColor: "black",
-                        width: 250,
-                        height: 150,
+                        width: "20%",
+                        height: "10%",
                         objectFit: "cover",
                     }}
                     className="item"
