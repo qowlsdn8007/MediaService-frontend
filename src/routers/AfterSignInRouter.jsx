@@ -10,6 +10,7 @@ import { getProfile, getProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
 import { setPreviewModalOpen } from "modules/uiControl";
 import { setProfile } from "modules/profile";
+import { useNavigate } from "react-router-dom";
 
 const AfterSignInRouter = ({ isNotFounded }) => {
     const { data } = Data;
@@ -33,6 +34,11 @@ const AfterSignInRouter = ({ isNotFounded }) => {
         getProfileList();
     }, [dispatch, data]);
 
+    const navigate = useNavigate();
+    const goToManageProfile = () => {
+        navigate("/manageProfile");
+    };
+
     return (
         <>
             <MainHeader />
@@ -46,7 +52,8 @@ const AfterSignInRouter = ({ isNotFounded }) => {
                     list={profileList}
                     title="티맥스를 시청할 프로필을 선택하세요."
                     btnName="프로필 관리"
-                    onClick={handleProfileChosen}
+                    onProfileClick={handleProfileChosen}
+                    onButtonClick={goToManageProfile}
                 />
             )}
         </>
