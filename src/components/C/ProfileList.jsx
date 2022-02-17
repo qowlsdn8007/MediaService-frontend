@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setLatestProfile } from "api/profile";
 import { setProfileId, setProfileManageType } from "modules/profile";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import EditIcon from "@mui/icons-material/Edit";
 import "./profile.css";
 import { Icon } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -31,7 +31,7 @@ const ProfileList = ({ list, type, onProfileClick }) => {
                             key={data.name}
                         />
                         {type === "manage" && (
-                            <BorderColorIcon className="profile-update" />
+                            <EditIcon className="profile-update" />
                         )}
                     </div>
                 </li>

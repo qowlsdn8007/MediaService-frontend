@@ -19,7 +19,7 @@ const AddProfileContainer = () => {
     const handleSaveProfile = () => {};
 
     return (
-        <Box className="center-box">
+        <Box className="addProfile-center-box">
             <Box className="add-container">
                 <h1 className="title">프로필 추가</h1>
                 <p className="sub-text">

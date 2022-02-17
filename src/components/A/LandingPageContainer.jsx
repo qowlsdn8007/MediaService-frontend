@@ -65,6 +65,9 @@ const LandinagPageContainer = () => {
                             variant="contained"
                             style={{ backgroundColor: "red" }}
                             onClick={() => handleStart(email)}
+                            onKeyPress={(e) =>
+                                e.key === "Enter" && console.log(e.key)
+                            }
                         >
                             <span>시작하기</span>
                             <ArrowForwardIosIcon />

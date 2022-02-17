@@ -1,37 +1,35 @@
 @media only screen and (min-width: 780px) {
-    .help-center-box {
+    .signup-center-box {
         text-align: center;
         position: absolute;
         display: flex;
         align-items: center;
         flex-direction: column;
-        justify-content: center;
-        top: 0;
-        left: 0;
-        right: 0;
+        background-color: #f3f3f3;
+        width: 100%;
+        height: 100%;
+        margin-top: 0;
         transform: scale(1);
         transition-delay: 200ms;
     }
 
-    .help-container {
+    .signup-container {
         position: relative;
         display: block;
         text-align: left;
-        justify-content: center;
-        background-color: #f3f3f3;
         padding: 40px;
     }
-    .help-container .sub-container {
+    .signup-container .sub-container {
         color: black;
         margin: 0 auto;
         padding: 0 5%;
     }
 
-    .help-container .title {
+    .signup-container .title {
         font-size: 4vw;
     }
 
-    .help-container .input {
+    .signup-container .input {
         color: #000;
         width: 100%;
         height: 44px;
@@ -41,11 +39,11 @@
         padding: 10px 11px;
         line-height: normal;
     }
-    .help-container .error:focus {
+    .signup-container .error:focus {
         outline: 1px solid red;
     }
 
-    .help-container .button {
+    .signup-container .button {
         display: inline-block;
         text-decoration: none;
         line-height: 1em;
@@ -64,44 +62,33 @@
 }
 
 @media screen and (max-width: 778px) {
-    .center-box {
+    .signup-center-box {
         position: absolute;
         background-color: #f3f3f3;
         width: 100%;
+        height: 100%;
     }
 
-    .help-container {
-        margin: 0;
+    .signup-container {
+        margin: 3%;
         position: relative;
         display: block;
         text-align: left;
     }
-    .help-container .sub-container {
+    .signup-container .sub-container {
         color: black;
         margin: 0 auto;
         padding: 0 5%;
     }
 
-    .help-container .title {
+    .signup-container .title {
         font-size: 4vw;
     }
 
-    .help-container .input {
-        color: #000;
-        width: 100%;
-        height: 44px;
-        font-size: 16px;
-        box-sizing: border-box;
-        border-radius: 2;
-        padding: 10px 11px;
-        line-height: normal;
-        outline: none;
-    }
-    .help-container .error:focus {
-        outline: 1px solid red;
+    .signup-container .input {
     }
 
-    .help-container .button {
+    .signup-container .button {
         display: inline-block;
         text-decoration: none;
         line-height: 1em;

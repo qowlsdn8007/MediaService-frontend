@@ -18,7 +18,7 @@ const EditProfileContainer = () => {
     };
 
     return (
-        <Box className="center-box">
+        <Box className="editprofile-center-box">
             <Box className="edit-container">
                 <h1 className="title">프로필 변경</h1>
                 <Divider className="divider" />
