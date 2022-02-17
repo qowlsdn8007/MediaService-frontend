@@ -13,7 +13,7 @@
         transition-delay: 200ms;
     }
 
-    .help-container {
+    .signup-container {
         position: relative;
         display: block;
         text-align: left;
@@ -21,17 +21,17 @@
         background-color: #f3f3f3;
         padding: 40px;
     }
-    .help-container .sub-container {
+    .signup-container .sub-container {
         color: black;
         margin: 0 auto;
         padding: 0 5%;
     }
 
-    .help-container .title {
+    .signup-container .title {
         font-size: 4vw;
     }
 
-    .help-container .input {
+    .signup-container .input {
         color: #000;
         width: 100%;
         height: 44px;
@@ -41,11 +41,11 @@
         padding: 10px 11px;
         line-height: normal;
     }
-    .help-container .error:focus {
+    .signup-container .error:focus {
         outline: 1px solid red;
     }
 
-    .help-container .button {
+    .signup-container .button {
         display: inline-block;
         text-decoration: none;
         line-height: 1em;
@@ -70,38 +70,26 @@
         width: 100%;
     }
 
-    .help-container {
+    .signup-container {
         margin: 0;
         position: relative;
         display: block;
         text-align: left;
     }
-    .help-container .sub-container {
+    .signup-container .sub-container {
         color: black;
         margin: 0 auto;
         padding: 0 5%;
     }
 
-    .help-container .title {
+    .signup-container .title {
         font-size: 4vw;
     }
 
-    .help-container .input {
-        color: #000;
-        width: 100%;
-        height: 44px;
-        font-size: 16px;
-        box-sizing: border-box;
-        border-radius: 2;
-        padding: 10px 11px;
-        line-height: normal;
-        outline: none;
-    }
-    .help-container .error:focus {
-        outline: 1px solid red;
+    .signup-container .input {
     }
 
-    .help-container .button {
+    .signup-container .button {
         display: inline-block;
         text-decoration: none;
         line-height: 1em;
