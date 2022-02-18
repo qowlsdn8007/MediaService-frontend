@@ -59,6 +59,9 @@ const LandinagPageContainer = () => {
                             variant="filled"
                             label="이메일 주소"
                             onChange={(e) => handleEmail(e.target.value)}
+                            onKeyPress={(e) =>
+                                e.key === "Enter" && handleEmail(e.target.value)
+                            }
                         />
                         <Button
                             className="button"
