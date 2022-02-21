@@ -10,12 +10,12 @@ import { enhancer } from 'addon-redux'
 import axios from 'axios';
 
 
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;   // baseURL
+//axios.defaults.baseURL = process.env.REACT_APP_API_URL;   // baseURL
 axios.defaults.withCredentials = true;     //   cookie give & take with backend
 
 if (process.env.NODE_ENV === 'development') {
-  const { worker } = require('./mocks/browser');
-  worker.start();
+  //const { worker } = require('./mocks/browser');
+  //worker.start();
 }  //   msw 라이브러리를 사용한 mock-server 구동
 export const store = createStore(rootReducer, {}, enhancer);
 

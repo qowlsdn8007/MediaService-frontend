@@ -1,5 +1,12 @@
 import React from "react";
-import { Dialog, DialogContent, Modal, Zoom } from "@mui/material";
+import {
+    createTheme,
+    Dialog,
+    DialogContent,
+    Modal,
+    ThemeProvider,
+    Zoom,
+} from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { setPreviewModalOpen } from "modules/uiControl";
 import PreviewModalTrack from "./PreviewModalTrack";
@@ -17,18 +24,19 @@ const PreviewModal = () => {
     const handleClose = () => {
         dispatch(setPreviewModalOpen(false));
     };
-
     return (
-        <Dialog
-            open={open}
-            onClose={handleClose}
-            TransitionComponent={Transition}
-        >
-            <DialogContent>
-                <PreviewModalInfo />
-                <PreviewModalTrack />
-            </DialogContent>
-        </Dialog>
+        <ThemeProvider theme={createTheme({ palette: { mode: "dark" } })}>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                TransitionComponent={Transition}
+            >
+                <DialogContent>
+                    <PreviewModalInfo />
+                    <PreviewModalTrack />
+                </DialogContent>
+            </Dialog>
+        </ThemeProvider>
     );
 };
 
