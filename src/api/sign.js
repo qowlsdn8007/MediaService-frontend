@@ -1,15 +1,20 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-import {
-    getCookie,
-    getLocalItem,
-    setCookie,
-    setLocalItem,
-} from "./browserStorage";
+import { setCookie } from "./browserStorage";
 import { deleteLatestProfile } from "./profile";
 
 const AUTH = "/auth";
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 24 hour
+
+export const onSignUp = async (data) => {
+    let result = {};
+    await axios
+        .post(AUTH + "/sign-up", data)
+        .then((res) => {
+            result = res.data;
+        })
+        .catch((err) => console.log(err));
+    return result;
+};
 
 export const onSignIn = async (email, password) => {
     const data = {
@@ -19,6 +24,9 @@ export const onSignIn = async (email, password) => {
     await axios
         .post(AUTH + "/sign-in", data)
         .then((res) => {
+            if (res.data.hasOwnProperty("errorCode")) {
+                throw res.data;
+            }
             const { accessToken, refreshToken } = res.data;
             setCookie("refreshToken", refreshToken.id, 90);
             axios.defaults.headers.common[
@@ -27,6 +35,7 @@ export const onSignIn = async (email, password) => {
         })
         .catch((err) => {
             console.log(err);
+            return err;
             // ERROR 컴포넌트를 보여주든 어찌든 후에 꼭 처리 로직 작성
         });
 };
@@ -75,4 +84,13 @@ export const emailCheck = async (email) => {
         .catch((err) => console.log(err));
 
     return result;
+};
+//export const onChangeEmail = async (email) => {};
+//export const onChangePassword = async (email) => {};
+
+export const onFindPassword = async (email) => {
+    return await axios
+        .post(AUTH + "/password", { email })
+        .then((res) => res.data)
+        .catch((err) => console.log(err));
 };

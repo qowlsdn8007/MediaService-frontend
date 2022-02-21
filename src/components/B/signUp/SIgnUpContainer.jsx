@@ -6,6 +6,7 @@ import {
     TextField,
 } from "@mui/material";
 import { validateEmail, validatePassword } from "api/validation";
+import { onSignUp } from "api/sign";
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import AuthNumChecker from "./AuthNumChecker";
@@ -22,7 +23,7 @@ const SignUpContainer = () => {
     const [errPw, setErrPw] = useState(false);
     const [checkAuthNum, setCheckAuthNum] = useState(false);
     const { state } = useLocation(); //  랜딩페이지에서 전달받은 이메일
-
+    const [id, setId] = useState(null);
     const isEmailErr = email && errEmail;
     const isPwErr = pw && errPw;
 
@@ -46,8 +47,12 @@ const SignUpContainer = () => {
         [setPw, setErrPw],
     );
 
-    const handleAgree = () => {
-        setCheckAuthNum(true);
+    const handleAgree = async () => {
+        const reqData = { email, password: pw };
+        const resData = await onSignUp(reqData);
+        setId(resData.id);
+        console.log(resData.id);
+        setCheckAuthNum(true); // 인증번호 확인 INPUT 출력
     };
 
     const enableAgree = pw && agree && !errEmail && !errPw;

@@ -1,20 +1,31 @@
-import { Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import { onFindPassword } from "api/sign";
 import { validateEmail } from "api/validation";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./SignInHelp.css";
 
 const SignInHelpContainer = () => {
     const [emailResponse, setEmailResponse] = useState(null);
     const [email, setEmail] = useState("");
     const [errEmail, setErrEmail] = useState(false);
+    const [id, setId] = useState(null);
+
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);
         setErrEmail(validateEmail(e.target.value));
     };
-    const handleFindPassword = () => {
-        setEmailResponse(true);
-    };
+    const handleFindPassword = useCallback(
+        async (email) => {
+            if (!isError) {
+                const resData = await onFindPassword(email);
+                const isResponse = resData ? true : false;
+                setEmailResponse(isResponse);
+                console.log(resData, isResponse);
+                if (resData.id !== undefined) setId(resData.id);
+            }
+        },
+        [emailResponse, id],
+    );
     const isError = email && errEmail;
 
     return (
@@ -39,13 +50,13 @@ const SignInHelpContainer = () => {
                         <div>
                             <button
                                 className="button"
-                                onClick={handleFindPassword}
+                                onClick={() => handleFindPassword(email)}
                             >
                                 이메일로 받기
                             </button>
                         </div>
                         {emailResponse &&
-                            (email ? (
+                            (id ? (
                                 <p style={{ color: "green" }}>
                                     새 비밀번호가 전송되었습니다. 메일을
                                     확인해주세요.

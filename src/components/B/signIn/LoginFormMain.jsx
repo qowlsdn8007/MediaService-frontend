@@ -13,6 +13,7 @@ const LoginFormMain = () => {
     const [pw, setPw] = useState("");
     const [errEmail, setErrEmail] = useState(false);
     const [errPw, setErrPw] = useState(false);
+    const [isError, setIsError] = useState("");
 
     const [autoCheck, setAutoCheck] = useState(
         getLocalItem("autoCheck", false),
@@ -51,6 +52,16 @@ const LoginFormMain = () => {
     return (
         <Box className="loginform-main">
             <h1 className="text">로그인</h1>
+            {isError && (
+                <div className="error">
+                    <p className="text">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Fugiat sit ea, odit debitis eius nihil est laboriosam
+                        beatae ipsa aliquam non necessitatibus, quam vitae dicta
+                        doloremque aperiam dignissimos. Sed, quas.
+                    </p>
+                </div>
+            )}
             <TextField
                 className="input"
                 color="warning"

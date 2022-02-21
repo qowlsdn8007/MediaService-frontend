@@ -15,6 +15,7 @@
 .login-container .loginform .loginform-main {
     display: flex;
     flex-direction: column;
+    border-radius: 4px;
 }
 
 .login-container .loginform .text {
@@ -26,15 +27,23 @@
     color: #b3b3b3;
 }
 
+.login-container .loginform .error {
+    background: #e87c03;
+    font-size: 14px;
+    margin: 0 0 16px;
+    padding: 10px 20px;
+    border-radius: inherit;
+}
+
 .login-container .loginform .input {
     margin-bottom: 2vh;
     background-color: #333;
-    border-radius: 10px;
+    border-radius: inherit;
 }
 
 .login-container .loginform .button {
     margin-top: 4vh;
-    border-radius: 7px;
     background-color: #e50914;
     height: 6vh;
+    border-radius: inherit;
 }
