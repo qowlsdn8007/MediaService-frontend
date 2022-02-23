@@ -3,6 +3,7 @@ import { setCookie } from "./browserStorage";
 import { deleteLatestProfile } from "./profile";
 
 const AUTH = "/auth";
+const USER = "/users";
 const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 24 hour
 
 export const onSignUp = async (data) => {
@@ -75,16 +76,6 @@ export const onSignOut = () => {
     }
     return false;
 } */
-
-export const emailCheck = async (email) => {
-    let result = null;
-    await axios
-        .post(AUTH + "/email", { email })
-        .then((res) => (result = res.status === 200 ? true : false))
-        .catch((err) => console.log(err));
-
-    return result;
-};
 //export const onChangeEmail = async (email) => {};
 //export const onChangePassword = async (email) => {};
 
@@ -92,5 +83,12 @@ export const onFindPassword = async (email) => {
     return await axios
         .post(AUTH + "/password", { email })
         .then((res) => res.data)
+        .catch((err) => console.log(err));
+};
+
+export const onFindEmail = async (email) => {
+    return await axios
+        .get(USER + `/email/is-duplicated?email=${email}`)
+        .then((res) => console.log(res))
         .catch((err) => console.log(err));
 };

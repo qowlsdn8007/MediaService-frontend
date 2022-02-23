@@ -2,6 +2,8 @@ import { Box } from "@mui/system";
 import { onFindPassword } from "api/sign";
 import { validateEmail } from "api/validation";
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setBackground } from "modules/uiControl";
 import "./SignInHelp.css";
 
 const SignInHelpContainer = () => {
@@ -9,6 +11,9 @@ const SignInHelpContainer = () => {
     const [email, setEmail] = useState("");
     const [errEmail, setErrEmail] = useState(false);
     const [id, setId] = useState(null);
+
+    const dispatch = useDispatch();
+    dispatch(setBackground("")); // 배경
 
     const handleChangeEmail = (e) => {
         setEmail(e.target.value);

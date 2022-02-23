@@ -4,25 +4,26 @@ import logo from "CI_TmaxEnterprise.png";
 import { onSignOut } from "api/sign";
 import { AppBar, Toolbar } from "@mui/material";
 import ProfileHeaderContainer from "components/C/ProfileHeaderContainer";
+import { useSelector } from "react-redux";
 
 const MainHeader = () => {
     const navigate = useNavigate();
-    const goToMain = () => {
-        navigate("/browse");
-    };
-    const goToSignOut = () => {
-        navigate("/signout");
-    };
-    const handleSignOut = () => {
-        onSignOut();
-        goToSignOut();
-    };
+    const { backgroundColor, rightNode } = useSelector(
+        (state) => state.uiControl.headerProps,
+    );
 
+    const goToHome = () => {
+        navigate("/");
+    };
+    const goToSignIn = () => {
+        navigate("/signin");
+    };
+    console.log(backgroundColor, rightNode);
     return (
         <AppBar
             position="static"
             sx={{
-                backgroundColor: "transparent",
+                backgroundColor: backgroundColor,
             }}
         >
             <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -30,10 +31,10 @@ const MainHeader = () => {
                     src={logo}
                     width="20%"
                     alt="logo"
-                    onClick={goToMain}
+                    onClick={goToHome}
                     style={{ cursor: "pointer" }}
                 />
-                <ProfileHeaderContainer />
+                {rightNode}
             </Toolbar>
         </AppBar>
     );

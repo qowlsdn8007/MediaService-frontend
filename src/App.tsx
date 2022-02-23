@@ -14,6 +14,7 @@ import ManageProfileRouter from "routers/ManageProfileRouter";
 import AccountManageRouter from "routers/AccountManageRouter";
 import {QueryClient, QueryClientProvider }  from"react-query";
 import {ReactQueryDevtools } from 'react-query/devtools'
+import MainHeader from "components/common/MainHeader";
 const AfterSignInRouter = React.lazy(
   (): any => import("./routers/AfterSignInRouter"),
 );
@@ -39,44 +40,22 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route      
-            index
-            element={
-              refreshToken ? (
-                <Navigate replace to="/browse" />
-              ) : (
-                <LandingPageRouter />
-              )
-            }
-          ></Route>
-          <Route
-            path="/signin"
-            element={
-              refreshToken ? (
-                <Navigate replace to="/browse" />
-              ) : (
-                <BeforeLoginRouter />
-              )
-            }
-          ></Route>
-          <Route
-            path="/browse"
-            element={
-              <Suspense fallback={<Loading />}>
+          <Route path="/*" element={<LandingPageRouter />} >
+            <Route path="signin" element={<BeforeLoginRouter />} />
+            <Route path="browse" element={     <Suspense fallback={<Loading />}>
                 <AfterSignInRouter />
-              </Suspense>
-            }
-          ></Route>
-          <Route path="/signup" element={<SignUpRouter />}></Route>
-          <Route path="/signinhelp" element={<SignInHelpRouter />}></Route>
-          <Route path="/signout" element={<SignOutRouter />}></Route>
+              </Suspense>} />
+              <Route path="signup" element={<SignUpRouter />}></Route>
+          <Route path="signinhelp" element={<SignInHelpRouter />}></Route>
+          <Route path="signout" element={<SignOutRouter />}></Route>
           <Route
-            path="/manageProfile"
+            path="manageProfile"
             element={<ManageProfileRouter />}
           ></Route>
-          <Route path="/yourAccount" element={<AccountManageRouter />}></Route>
-          <Route path="/notfound" element={<NotFound />}></Route>
-        </Routes>
+          <Route path="yourAccount" element={<AccountManageRouter />}></Route>
+          <Route path="notfound" element={<NotFound />}></Route>
+          </Route>
+          </Routes>
       </BrowserRouter>
     </div>
     <ReactQueryDevtools initialIsOpen={false} />

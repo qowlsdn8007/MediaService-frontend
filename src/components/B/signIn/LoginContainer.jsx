@@ -8,7 +8,6 @@ import "./login.css";
 const LoginContainer = () => {
     return (
         <div className="login-container">
-            <LandingHeader LoginButton={false} />
             <Box className="loginform">
                 <LoginFormMain />
                 <LoginFormOther />

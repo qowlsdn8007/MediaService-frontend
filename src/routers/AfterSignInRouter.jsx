@@ -8,7 +8,11 @@ import MainHeader from "components/common/MainHeader";
 import ProfileContainer from "components/C/ProfileContainer";
 import { getProfile, getProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
-import { setPreviewModalOpen } from "modules/uiControl";
+import {
+    setBackground,
+    setHeaderProps,
+    setPreviewModalOpen,
+} from "modules/uiControl";
 import { setProfile } from "modules/profile";
 import { useNavigate } from "react-router-dom";
 
@@ -39,9 +43,10 @@ const AfterSignInRouter = ({ isNotFounded }) => {
         navigate("/manageProfile");
     };
 
+    dispatch(setBackground("dark-container"));
+    dispatch(setHeaderProps({ backgroundColor: "black", rightNode: null }));
     return (
         <>
-            <MainHeader />
             {chosenProfile ? (
                 <div>
                     <Slider />

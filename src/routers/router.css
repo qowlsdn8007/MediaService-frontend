@@ -1,0 +1,19 @@
+.landing-container {
+    height: 80vh;
+    width: 100%;
+    background: radial-gradient(transparent 50%, black),
+        url("https://assets.nflxext.com/ffe/siteui/vlv3/6dea7743-5586-45d1-89a2-9569b1bb0340/79c3c9e6-9da9-4265-9e1e-c4ae6d0fbf2c/KR-ko-20220207-popsignuptwoweeks-perspective_alpha_website_small.jpg");
+    background-size: cover;
+}
+
+.white-container {
+    height: 80vh;
+    width: 100%;
+    background-color: #fff;
+}
+
+.dark-container {
+    height: 80vh;
+    width: 100%;
+    background-color: black;
+}

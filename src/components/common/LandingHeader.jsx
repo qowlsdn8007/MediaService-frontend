@@ -20,7 +20,7 @@ const LandingHeader = ({ LoginButton = true }) => {
                 {LoginButton && (
                     <Button
                         variant="contained"
-                        style={{ backgroundColor: "red" }}
+                        style={{ backgroundColor: "#e50914" }}
                         onClick={goToSignIn}
                     >
                         로그인
