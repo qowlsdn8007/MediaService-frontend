@@ -3,6 +3,7 @@ import AddProfileContainer from "components/C/AddProfileContainer";
 import EditProfileContainer from "components/C/EditProfileContainer";
 import ProfileContainer from "components/C/ProfileContainer";
 import { setProfileIdForEdit, setProfileManageType } from "modules/profile";
+import { setHeaderRightNode } from "modules/uiControl";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +15,7 @@ const ManageProfileRouter = () => {
         (state) => state.profile.profileIdForEdit,
     );
     const dispatch = useDispatch();
+
     const handleProfileChosen = useCallback(
         (id) => {
             dispatch(setProfileIdForEdit());
@@ -36,6 +38,8 @@ const ManageProfileRouter = () => {
     const goToMain = () => {
         navigate("/browse");
     };
+
+    dispatch(setHeaderRightNode(null)); //  헤더 우측 비게
 
     return (
         <div className="container">

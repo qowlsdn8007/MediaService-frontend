@@ -4,12 +4,14 @@ import LoginButton from "components/common/LoginButton";
 
 const SETPREVIEWMODALOPEN = "ui/SETPREVIEWMODALOPEN";
 const SETMOVIEDATA = "ui/SETMOVIEDATA";
-const SETHEADERPROPS = "ui/SETHEADERPROPS";
+const SETHEADERBG = "ui/SETHEADERBG";
+const SETHEADERRIGHTNODE = "ui/SETHEADERRIGHTNODE";
 const SETBACKGROUND = "Ui/SETBACKGROUND";
 
 export const setPreviewModalOpen = createAction(SETPREVIEWMODALOPEN);
 export const setMovieData = createAction(SETMOVIEDATA);
-export const setHeaderProps = createAction(SETHEADERPROPS);
+export const setHeaderBg = createAction(SETHEADERBG);
+export const setHeaderRightNode = createAction(SETHEADERRIGHTNODE);
 export const setBackground = createAction(SETBACKGROUND);
 
 const initialState = {
@@ -40,10 +42,15 @@ const uiControl = handleActions(
             produce(state, (draft) => {
                 draft.movieData = movieData;
             }),
-        [SETHEADERPROPS]: (state, { payload: headerProps }) =>
+        [SETHEADERBG]: (state, { payload: backgroundColor }) =>
             produce(state, (draft) => {
-                draft.headerProps = headerProps;
+                draft.headerProps.backgroundColor = backgroundColor;
             }),
+        [SETHEADERRIGHTNODE]: (state, { payload: rightNode }) =>
+            produce(state, (draft) => {
+                draft.headerProps.rightNode = rightNode;
+            }),
+
         [SETBACKGROUND]: (state, { payload: background }) =>
             produce(state, (draft) => {
                 draft.background = background;

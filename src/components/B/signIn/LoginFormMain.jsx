@@ -41,10 +41,14 @@ const LoginFormMain = () => {
     };
 
     const navigate = useNavigate();
+
     const goToAfterLogin = () => {
+        navigate("/browse");
+    };
+    const handleSignIn = () => {
         onSignIn(email, pw).then(() => {
             if (axios.defaults.headers.common["Authorization"]) {
-                navigate("/browse");
+                goToAfterLogin();
             }
         });
     };
@@ -91,7 +95,7 @@ const LoginFormMain = () => {
                     비밀번호는 8~20 자 사이에 영문을 포함한 문자여야 합니다.
                 </p>
             )}
-            <button className="button" onClick={goToAfterLogin}>
+            <button className="button" onClick={handleSignIn}>
                 <b className="text">로그인</b>
             </button>
             <Box

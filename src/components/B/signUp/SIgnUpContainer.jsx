@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AuthNumChecker from "./AuthNumChecker";
 import "./SignUp.css";
 import { useDispatch } from "react-redux";
-import { setBackground, setHeaderProps } from "modules/uiControl";
+import { setBackground, setHeaderBg } from "modules/uiControl";
 
 const SignUpContainer = () => {
     const [agree, SetAgree] = useState(false);

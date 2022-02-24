@@ -6,6 +6,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { getCookie } from "api/browserStorage";
 import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
+import "./router.css";
 
 const LandingPageRouter = () => {
     const [refreshToken, setRefreshToken] = useState(null);

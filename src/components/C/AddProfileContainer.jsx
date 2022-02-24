@@ -6,17 +6,44 @@ import {
     TextField,
 } from "@mui/material";
 import { Box, flexbox } from "@mui/system";
+import { createProfile } from "api/profile";
+import axios from "axios";
 import { setProfileManageType } from "modules/profile";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./AddProfile.css";
 
 const AddProfileContainer = () => {
+    const [profile, setProfile] = useState({
+        mainImage: "",
+        name: "",
+        rate: "19+",
+    });
+    const defaultImage =
+        "https://occ-0-988-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbjbcaILd-GMEENSsTfeawbBPWzzai65yPT4WBBj6ZjcPlXXIKqBJl0TkdItsaJGtPKSDC5RJ4bv_---JV-K5umdUtOk.png?r=6c2";
+
     const dispatch = useDispatch();
+
     const handleCancel = useCallback(() => {
         dispatch(setProfileManageType("default"));
     }, []);
-    const handleSaveProfile = () => {};
+
+    const handleCreateProfile = async () => {
+        setProfile({ ...profile, mainImage: defaultImage });
+        console.log(profile);
+        console.log(axios.defaults.headers);
+        await createProfile(profile).then((res) => console.log(res));
+        dispatch(setProfileManageType("default"));
+    };
+
+    const handleInput = (e) => {
+        setProfile({ ...profile, name: e.target.value });
+    };
+    const handleRate = (e) => {
+        let rate = "";
+        e.target.checked ? (rate = "7+") : (rate = "19+");
+        setProfile({ ...profile, rate });
+    };
 
     return (
         <Box className="addProfile-center-box">
@@ -31,22 +58,37 @@ const AddProfileContainer = () => {
                     <div>
                         <img
                             className="image"
-                            src="https://occ-0-988-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbjbcaILd-GMEENSsTfeawbBPWzzai65yPT4WBBj6ZjcPlXXIKqBJl0TkdItsaJGtPKSDC5RJ4bv_---JV-K5umdUtOk.png?r=6c2"
+                            src={defaultImage}
                             alt="프로필 이미지"
                         />
                     </div>
                     <Box>
-                        <input className="input" type="text" />
+                        <input
+                            className="input"
+                            type="text"
+                            value={profile.name}
+                            onChange={handleInput}
+                        />
                         <FormControlLabel
                             className="checkbox"
-                            control={<Checkbox sx={{ color: "#666" }} />}
+                            control={
+                                <Checkbox
+                                    sx={{ color: "#666" }}
+                                    onChange={handleRate}
+                                />
+                            }
                             label="어린이인가요?"
                         />
                     </Box>
                 </div>
                 <Divider className="divider" />
                 <Box>
-                    <button className="profile-button">다음</button>
+                    <button
+                        className="profile-button"
+                        onClick={handleCreateProfile}
+                    >
+                        다음
+                    </button>
                     <button className="profile-button" onClick={handleCancel}>
                         취소
                     </button>

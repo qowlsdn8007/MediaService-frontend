@@ -10,8 +10,8 @@ import { getProfile, getProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
 import {
     setBackground,
-    setHeaderProps,
-    setPreviewModalOpen,
+    setHeaderBg,
+    setHeaderRightNode,
 } from "modules/uiControl";
 import { setProfile } from "modules/profile";
 import { useNavigate } from "react-router-dom";
@@ -44,7 +44,7 @@ const AfterSignInRouter = ({ isNotFounded }) => {
     };
 
     dispatch(setBackground("dark-container"));
-    dispatch(setHeaderProps({ backgroundColor: "black", rightNode: null }));
+
     return (
         <>
             {chosenProfile ? (

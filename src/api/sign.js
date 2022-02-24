@@ -26,7 +26,7 @@ export const onSignIn = async (email, password) => {
         .post(AUTH + "/sign-in", data)
         .then((res) => {
             if (res.data.hasOwnProperty("errorCode")) {
-                throw res.data;
+                console.log(res.data.errorCode); // 에러 처리 로직
             }
             const { accessToken, refreshToken } = res.data;
             setCookie("refreshToken", refreshToken.id, 90);

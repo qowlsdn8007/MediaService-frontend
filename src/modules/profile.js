@@ -14,7 +14,7 @@ export const setProfileAvatarAnchor = createAction(SETPROFILEAVATORANCHOR);
 const initialState = {
     currentProfile: null,
     profileIdForEdit: "",
-    proflieManageType: "default",
+    profileManageType: "default",
 
     profileAvatarAnchor: null,
 };

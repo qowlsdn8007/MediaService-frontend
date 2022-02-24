@@ -11,8 +11,8 @@ const ProfileList = ({ list, type, onProfileClick }) => {
     const dispatch = useDispatch();
     const mtype = useSelector((state) => state.profile.profileManageType);
 
-    const handleClickAdd = () => {
-        dispatch(setProfileManageType("add"));
+    const handleClickAdd = async () => {
+        await dispatch(setProfileManageType("add"));
         console.log(mtype);
     }; //  profileManage 컴포넌트   Add로 변경
 
