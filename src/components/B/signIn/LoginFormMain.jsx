@@ -7,6 +7,8 @@ import { Box, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import "./login.css";
 import { validateEmail, validatePassword } from "api/validation";
 import { textAlign } from "@mui/system";
+import { useDispatch } from "react-redux";
+import { setProfileList } from "modules/profile";
 
 const LoginFormMain = () => {
     const [email, setEmail] = useState("");
@@ -41,15 +43,18 @@ const LoginFormMain = () => {
     };
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const goToAfterLogin = () => {
         navigate("/browse");
     };
-    const handleSignIn = () => {
-        onSignIn(email, pw).then(() => {
-            if (axios.defaults.headers.common["Authorization"]) {
-                goToAfterLogin();
-            }
+    const handleSignIn = async () => {
+        await onSignIn(email, pw).then((res) => {
+            const profileList = res.profileList;
+            console.log(profileList);
+            if (profileList === undefined) profileList = [];
+            dispatch(setProfileList(profileList));
+            goToAfterLogin();
         });
     };
 

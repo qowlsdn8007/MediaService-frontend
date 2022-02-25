@@ -1,4 +1,4 @@
-import { getProfiles } from "api/profile";
+import { getUserProfiles } from "api/profile";
 import AddProfileContainer from "components/C/AddProfileContainer";
 import EditProfileContainer from "components/C/EditProfileContainer";
 import ProfileContainer from "components/C/ProfileContainer";
@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const ManageProfileRouter = () => {
-    const [profileList, setProfileList] = useState([]);
+    const profileList = useSelector((state) => state.profile.profileList);
     const manageType = useSelector((state) => state.profile.profileManageType);
     const chosenProfileId = useSelector(
         (state) => state.profile.profileIdForEdit,
@@ -25,8 +25,7 @@ const ManageProfileRouter = () => {
     );
 
     const getProfileList = async () => {
-        const list = await getProfiles();
-        setProfileList(list);
+        const list = await getUserProfiles();
     };
 
     useEffect(() => {

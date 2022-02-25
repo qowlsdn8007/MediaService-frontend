@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { withAuth } from "hoc/withAuth";
 import Slider from "components/D/D-06 (lolomo-row)/Slider";
@@ -6,7 +6,7 @@ import { setMovies } from "modules/movie";
 import Data from "videoData.json";
 import MainHeader from "components/common/MainHeader";
 import ProfileContainer from "components/C/ProfileContainer";
-import { getProfile, getProfiles, setLatestProfile } from "api/profile";
+import { getProfile, getUserProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
 import {
     setBackground,
@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 const AfterSignInRouter = ({ isNotFounded }) => {
     const { data } = Data;
-    const [profileList, setProfileList] = useState([]);
+    const profileList = useSelector((state) => state.profile.profileList);
     const dispatch = useDispatch();
     const handleProfileChosen = useCallback(
         (profile) => {
@@ -29,8 +29,7 @@ const AfterSignInRouter = ({ isNotFounded }) => {
     );
     const chosenProfile = useSelector((state) => state.profile.currentProfile);
     const getProfileList = async () => {
-        const list = await getProfiles();
-        setProfileList(list);
+        const list = await getUserProfiles();
     };
 
     useEffect(() => {

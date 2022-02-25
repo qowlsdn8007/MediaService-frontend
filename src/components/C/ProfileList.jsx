@@ -15,27 +15,28 @@ const ProfileList = ({ list, type, onProfileClick }) => {
         await dispatch(setProfileManageType("add"));
         console.log(mtype);
     }; //  profileManage 컴포넌트   Add로 변경
-
+    console.log(list);
     return (
         <ul className="profile-list">
-            {list.map((data) => (
-                <li
-                    className="profile-item"
-                    onClick={() => onProfileClick(data)}
-                >
-                    <div>
-                        <img
-                            style={{ borderRadius: "1rem" }}
-                            src={data.main_image}
-                            alt={data.name}
-                            key={data.name}
-                        />
-                        {type === "manage" && (
-                            <EditIcon className="profile-update" />
-                        )}
-                    </div>
-                </li>
-            ))}
+            {list &&
+                list.map((data) => (
+                    <li
+                        className="profile-item"
+                        onClick={() => onProfileClick(data)}
+                    >
+                        <div>
+                            <img
+                                style={{ borderRadius: "1rem" }}
+                                src={data.mainImage}
+                                alt={data.name}
+                                key={data.name}
+                            />
+                            {type === "manage" && (
+                                <EditIcon className="profile-update" />
+                            )}
+                        </div>
+                    </li>
+                ))}
             {list.length < 5 && (
                 <li className="profile-item" onClick={handleClickAdd}>
                     <div>

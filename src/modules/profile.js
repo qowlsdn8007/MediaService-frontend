@@ -5,14 +5,17 @@ const SETPROFILE = "profile/SETPROFILEID";
 const SETPROFILEIDFOREDIT = "profile/SETPROFILEIDFOREDIT";
 const SETPROFILEMANAGETYPE = "profile/SETPROFILEMANAGETYPE";
 const SETPROFILEAVATORANCHOR = "profile/SETPROFILEAVATORANCHOR";
+const SETPROFILELIST = "profile/SETPROFILELIST";
 
 export const setProfile = createAction(SETPROFILE);
 export const setProfileIdForEdit = createAction(SETPROFILEIDFOREDIT);
 export const setProfileManageType = createAction(SETPROFILEMANAGETYPE);
 export const setProfileAvatarAnchor = createAction(SETPROFILEAVATORANCHOR);
+export const setProfileList = createAction(SETPROFILELIST);
 
 const initialState = {
     currentProfile: null,
+    profileList: [],
     profileIdForEdit: "",
     profileManageType: "default",
 
@@ -25,6 +28,11 @@ const profile = handleActions(
             produce(state, (draft) => {
                 draft.currentProfile = currentProfile;
             }),
+        [SETPROFILELIST]: (state, { payload: profileList }) =>
+            produce(state, (draft) => {
+                draft.profileList = profileList;
+            }),
+
         [SETPROFILEIDFOREDIT]: (state, { payload: profileIdForEdit }) =>
             produce(state, (draft) => {
                 draft.profileIdForEdit = profileIdForEdit;

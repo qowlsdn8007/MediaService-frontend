@@ -22,7 +22,7 @@ export const onSignIn = async (email, password) => {
         email,
         password,
     };
-    await axios
+    return await axios
         .post(AUTH + "/sign-in", data)
         .then((res) => {
             if (res.data.hasOwnProperty("errorCode")) {
@@ -30,9 +30,8 @@ export const onSignIn = async (email, password) => {
             }
             const { accessToken, refreshToken } = res.data;
             setCookie("refreshToken", refreshToken.id, 90);
-            axios.defaults.headers.common[
-                "Authorization"
-            ] = `Bearer ${accessToken}`; // header에 항상 디폴트로 accessToken 설정
+            axios.defaults.headers.common["access_token"] = `${accessToken}`; // header에 항상 디폴트로 accessToken 설정
+            return res.data;
         })
         .catch((err) => {
             console.log(err);

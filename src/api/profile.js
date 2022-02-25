@@ -8,7 +8,7 @@ export const getProfile = async (id) => {
     return profile;
 };
 
-export const getProfiles = async () => {
+export const getUserProfiles = async () => {
     const profiles = await axios.get(PF + "/sign-in/1").then((res) => res.data);
 
     return profiles;
