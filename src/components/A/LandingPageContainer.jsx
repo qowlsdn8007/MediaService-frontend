@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { validateEmail } from "api/validation";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
-import { onFindEmail } from "api/sign";
+import { isDuplicatedEmail } from "api/sign";
 import { setBackground } from "modules/uiControl";
 import { useDispatch } from "react-redux";
 import "./LandingPageContainer.css";
@@ -38,7 +38,7 @@ const LandinagPageContainer = () => {
         async (email) => {
             email &&
                 !errText &&
-                (await onFindEmail(email).then((res) =>
+                (await isDuplicatedEmail(email).then((res) =>
                     res ? goToSignIn() : goToSignUp(email),
                 ));
         },
