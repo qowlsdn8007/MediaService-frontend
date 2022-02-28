@@ -13,6 +13,8 @@ import { useDispatch } from "react-redux";
 import "./LandingPageContainer.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import LoginButton from "components/common/LoginButton";
+import { getCookie } from "api/browserStorage";
+import axios from "axios";
 
 const LandinagPageContainer = () => {
     const [email, setEmail] = useState("");
@@ -55,6 +57,18 @@ const LandinagPageContainer = () => {
         },
         [errText, goToSignIn, goToSignUp],
     );
+
+    axios.interceptors.request.use(function (request) {
+        if (!request.headers.access_token) {
+            request.headers.refresh_token = getCookie("refresh_token");
+        }
+    });
+    axios.interceptors.response.use(function (response) {
+        if (response.headers.access_token) {
+            axios.defaults.headers.access_token = response.headers.access_token;
+            delete axios.defaults.headers.refresh_token;
+        }
+    });
 
     return (
         <Box>

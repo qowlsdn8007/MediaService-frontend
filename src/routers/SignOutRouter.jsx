@@ -16,11 +16,12 @@ const SignOutRouter = () => {
 
     useEffect(() => {
         timer = (() => setTimeout(goToHome, setTime))(); // checkTime 값은 이 페이지 벗어나면 초기화 되어야함
+
+        return clearTimeout(timer);
     }, []);
 
     return (
         <>
-            <LandingHeader />
             <SignOutContainer goToHome={handleGoToHome} />
         </>
     );

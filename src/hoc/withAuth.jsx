@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
-import { onSilentRefresh } from "api/sign";
+//import { onSilentRefresh } from "api/sign";
 import { getCookie } from "api/browserStorage";
 import { useDispatch } from "react-redux";
 import { getLatestProfileId, getProfile } from "api/profile";
@@ -32,7 +32,7 @@ export const withAuth = (Component) => (props) => {
             if (!refreshToken) {
                 navigate("/error");
             } else {
-                onSilentRefresh(); // 자동 접속
+                //onSilentRefresh(); // 자동 접속
                 getPid(); // 최근 프로필에 맞게 접속, 최근 기록 없으면 선택컴포넌트 출력
             }
         }

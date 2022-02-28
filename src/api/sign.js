@@ -25,6 +25,7 @@ export const onSignIn = async ({ email, pw }) => {
         });
 };
 
+/*
 export const onSilentRefresh = async () => {
     await axios
         .get(AUTH + "/silent-refresh")
@@ -35,11 +36,12 @@ export const onSilentRefresh = async () => {
         });
 };
 
-const onLoginSuccess = (res) => {
+  const onLoginSuccess = (res) => {
     const { accessToken } = res.data;
     axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
 };
+*/
 
 export const onSignOut = () => {
     axios.defaults.headers.common["Authorization"] = null; // accessToken 초기화
