@@ -13,11 +13,8 @@ export const onSignUp = async (data) => {
         .catch((err) => console.log(err));
 };
 
-export const onSignIn = async (email, password) => {
-    const data = {
-        email,
-        password,
-    };
+export const onSignIn = async ({ email, pw }) => {
+    const data = { email, password: pw };
     return await axios
         .post(AUTH + "/sign-in", data)
         .then((res) => res.data)
@@ -60,7 +57,7 @@ export const onFindPassword = async (email) => {
 export const isDuplicatedEmail = async (email) => {
     return await axios
         .get(USER + `/email/is-duplicated?email=${email}`)
-        .then((res) => res.status) //  반환값 없으므로  status 반환시키자
+        .then((res) => res.data) //  반환값 없으므로  status 반환시키자
         .catch((err) => console.log(err));
 };
 
@@ -73,14 +70,14 @@ export const updatePassword = async ({ dstPassword, srcPassword }) => {
 
 export const sendEmailForAuthNumber = async ({ email }) => {
     return await axios
-        .get(AUTH + "/verify-mail")
+        .post(AUTH + "/verify-mail", { email })
         .then((res) => res.data)
         .catch((err) => console.log(err));
 };
 
 export const isAuthNumberCorrect = async ({ email, signUpKey }) => {
     return await axios
-        .get(AUTH + "/verify-auth")
+        .post(AUTH + "/verify-auth")
         .then((res) => res.data)
         .catch((err) => console.log(err));
 };

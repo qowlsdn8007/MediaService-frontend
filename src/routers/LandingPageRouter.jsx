@@ -12,7 +12,7 @@ const LandingPageRouter = () => {
     const [refreshToken, setRefreshToken] = useState(null);
 
     useEffect(() => {
-        const token = getCookie("refreshToken");
+        const token = getCookie("refresh_token");
         setRefreshToken(token);
     }, []);
 

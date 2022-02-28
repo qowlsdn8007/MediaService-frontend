@@ -44,7 +44,6 @@ const ManageProfileRouter = () => {
         <div className="container">
             {manageType === "default" ? (
                 <ProfileContainer
-                    list={profileList}
                     title="프로필 관리"
                     type="manage"
                     btnName="완료"

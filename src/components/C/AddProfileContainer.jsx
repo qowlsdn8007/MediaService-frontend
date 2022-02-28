@@ -30,9 +30,7 @@ const AddProfileContainer = () => {
 
     const handleCreateProfile = async () => {
         setProfile({ ...profile, mainImage: defaultImage });
-        console.log(profile);
-        console.log(axios.defaults.headers);
-        await createProfile(profile).then((res) => console.log(res));
+        await createProfile(profile);
         dispatch(setProfileManageType("default"));
     };
 

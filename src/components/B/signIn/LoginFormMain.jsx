@@ -1,14 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { onSignIn } from "api/sign";
-import { getLocalItem, setLocalItem } from "api/browserStorage";
+import { getLocalItem, setCookie, setLocalItem } from "api/browserStorage";
 import { Box, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import "./login.css";
 import { validateEmail, validatePassword } from "api/validation";
-import { textAlign } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { setProfileList } from "modules/profile";
+import { useMutation, useQuery } from "react-query";
 
 const LoginFormMain = () => {
     const [email, setEmail] = useState("");
@@ -48,14 +48,31 @@ const LoginFormMain = () => {
     const goToAfterLogin = () => {
         navigate("/browse");
     };
-    const handleSignIn = async () => {
-        await onSignIn(email, pw).then((res) => {
-            const profileList = res.profileList;
-            console.log(profileList);
-            if (profileList === undefined) profileList = [];
-            dispatch(setProfileList(profileList));
-            goToAfterLogin();
-        });
+
+    const signInMutation = useMutation(onSignIn, {
+        onError: (error, variable, context) => {
+            // error
+            setIsError(error.message);
+            //  서버에서 errorcode를 status 200 으로 주고 있다....
+        },
+        onSuccess: (data, variables, context) => {
+            console.log("success", data, variables, context);
+            if (data.hasOwnProperty("errorCode")) {
+                setIsError(data.message);
+            } else {
+                axios.defaults.headers["access_token"] = data.accessToken; // access
+                setCookie("refresh_token", data.refreshToken.id, 90); // refresh
+                dispatch(setProfileList(data.profileList));
+                goToAfterLogin();
+            }
+        },
+        onSettled: () => {
+            console.log("end");
+        },
+    });
+
+    const handleSignIn = () => {
+        signInMutation.mutate({ email, pw });
     };
 
     return (
@@ -63,12 +80,7 @@ const LoginFormMain = () => {
             <h1 className="text">로그인</h1>
             {isError && (
                 <div className="error">
-                    <p className="text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Fugiat sit ea, odit debitis eius nihil est laboriosam
-                        beatae ipsa aliquam non necessitatibus, quam vitae dicta
-                        doloremque aperiam dignissimos. Sed, quas.
-                    </p>
+                    <p className="text">{isError}</p>
                 </div>
             )}
             <TextField

@@ -4,21 +4,16 @@ import { withAuth } from "hoc/withAuth";
 import Slider from "components/D/D-06 (lolomo-row)/Slider";
 import { setMovies } from "modules/movie";
 import Data from "videoData.json";
-import MainHeader from "components/common/MainHeader";
 import ProfileContainer from "components/C/ProfileContainer";
-import { getProfile, getUserProfiles, setLatestProfile } from "api/profile";
+import { getUserProfiles, setLatestProfile } from "api/profile";
 import PreviewModal from "components/D/D-08 (preview-modal)/PreviewModal";
-import {
-    setBackground,
-    setHeaderBg,
-    setHeaderRightNode,
-} from "modules/uiControl";
+import { setBackground } from "modules/uiControl";
 import { setProfile } from "modules/profile";
 import { useNavigate } from "react-router-dom";
+import MainContainer from "components/D/MainContainer";
 
-const AfterSignInRouter = ({ isNotFounded }) => {
+const AfterSignInRouter = () => {
     const { data } = Data;
-    const profileList = useSelector((state) => state.profile.profileList);
     const dispatch = useDispatch();
     const handleProfileChosen = useCallback(
         (profile) => {
@@ -47,13 +42,9 @@ const AfterSignInRouter = ({ isNotFounded }) => {
     return (
         <>
             {chosenProfile ? (
-                <div>
-                    <Slider />
-                    <PreviewModal />
-                </div>
+                <MainContainer />
             ) : (
                 <ProfileContainer
-                    list={profileList}
                     title="티맥스를 시청할 프로필을 선택하세요."
                     btnName="프로필 관리"
                     onProfileClick={handleProfileChosen}

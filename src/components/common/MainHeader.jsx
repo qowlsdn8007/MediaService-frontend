@@ -18,7 +18,6 @@ const MainHeader = () => {
     const goToSignIn = () => {
         navigate("/signin");
     };
-    console.log(backgroundColor, rightNode);
     return (
         <AppBar
             position="static"

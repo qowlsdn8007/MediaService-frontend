@@ -25,7 +25,6 @@ const SignInHelpContainer = () => {
                 const resData = await onFindPassword(email);
                 const isResponse = resData ? true : false;
                 setEmailResponse(isResponse);
-                console.log(resData, isResponse);
                 if (resData.id !== undefined) setId(resData.id);
             }
         },

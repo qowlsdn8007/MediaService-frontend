@@ -1,13 +1,18 @@
 import { Button, TextField } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { validateEmail } from "api/validation";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
-import { isDuplicatedEmail } from "api/sign";
-import { setBackground } from "modules/uiControl";
+import { isDuplicatedEmail, sendEmailForAuthNumber } from "api/sign";
+import {
+    setBackground,
+    setHeaderBg,
+    setHeaderRightNode,
+} from "modules/uiControl";
 import { useDispatch } from "react-redux";
 import "./LandingPageContainer.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import LoginButton from "components/common/LoginButton";
 
 const LandinagPageContainer = () => {
     const [email, setEmail] = useState("");
@@ -16,15 +21,21 @@ const LandinagPageContainer = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    dispatch(setBackground("landing-container"));
+    useEffect(() => {
+        dispatch(setBackground("landing-container"));
+        dispatch(setHeaderRightNode(<LoginButton />));
+    }, []);
 
     const goToSignIn = useCallback(() => {
         navigate("/signin");
     }, [navigate]);
 
     const goToSignUp = useCallback(
-        (email) => {
-            return navigate("/signup", { state: email });
+        async (email) => {
+            await sendEmailForAuthNumber({ email }).then((res) =>
+                console.log(res),
+            );
+            navigate("/signup", { state: email });
         },
         [navigate],
     );

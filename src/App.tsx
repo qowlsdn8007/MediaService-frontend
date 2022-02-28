@@ -9,12 +9,12 @@ import Loading from "./components/common/Loading";
 //import { onCheckedAutoSignIn } from './api/sign';
 import { getCookie } from "./api/browserStorage";
 import SignOutRouter from "./routers/SignOutRouter";
-import NotFound from "./routers/NotFound";
 import ManageProfileRouter from "routers/ManageProfileRouter";
 import AccountManageRouter from "routers/AccountManageRouter";
 import {QueryClient, QueryClientProvider }  from"react-query";
 import {ReactQueryDevtools } from 'react-query/devtools'
 import MainHeader from "components/common/MainHeader";
+import ErrorPage from "routers/ErrorPage";
 const AfterSignInRouter = React.lazy(
   (): any => import("./routers/AfterSignInRouter"),
 );
@@ -45,15 +45,15 @@ function App() {
             <Route path="browse" element={     <Suspense fallback={<Loading />}>
                 <AfterSignInRouter />
               </Suspense>} />
-              <Route path="signup" element={<SignUpRouter />}></Route>
-          <Route path="signinhelp" element={<SignInHelpRouter />}></Route>
-          <Route path="signout" element={<SignOutRouter />}></Route>
-          <Route
-            path="manageProfile"
-            element={<ManageProfileRouter />}
-          ></Route>
-          <Route path="yourAccount" element={<AccountManageRouter />}></Route>
-          <Route path="notfound" element={<NotFound />}></Route>
+            <Route path="signup" element={<SignUpRouter />}></Route>
+            <Route path="signinhelp" element={<SignInHelpRouter />}></Route>
+            <Route path="signout" element={<SignOutRouter />}></Route>
+            <Route
+              path="manageProfile"
+              element={<ManageProfileRouter />}
+            ></Route>
+            <Route path="yourAccount" element={<AccountManageRouter />}></Route>
+            <Route path="*" element={<ErrorPage />}></Route>
           </Route>
           </Routes>
       </BrowserRouter>

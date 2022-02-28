@@ -28,15 +28,15 @@ export const withAuth = (Component) => (props) => {
     useEffect(() => {
         const accessToken = axios.defaults.headers.common["access_token"];
         if (!accessToken) {
-            const refreshToken = getCookie("refreshToken");
+            const refreshToken = getCookie("refresh_token");
             if (!refreshToken) {
-                navigate("/notfound");
+                navigate("/error");
             } else {
                 onSilentRefresh(); // 자동 접속
                 getPid(); // 최근 프로필에 맞게 접속, 최근 기록 없으면 선택컴포넌트 출력
             }
         }
-    }, [getPid, navigate, props.isNotFounded]);
+    }, [getPid, navigate]);
 
     // 1. accessToken 유효시 통과
     // 2. accessToken 소실 및 만료시 => refresh Token 존재하면 silentRefresh로 갱신
