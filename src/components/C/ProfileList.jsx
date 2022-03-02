@@ -37,7 +37,7 @@ const ProfileList = ({ type, onProfileClick }) => {
                                 style={{ borderRadius: "1rem" }}
                                 src={profile.mainImage}
                                 alt={profile.name}
-                                key={profile.name}
+                                key={profile.id}
                             />
                             {type === "manage" && (
                                 <EditIcon className="profile-update" />

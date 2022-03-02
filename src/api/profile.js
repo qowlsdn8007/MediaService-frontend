@@ -34,7 +34,7 @@ export const getLatestProfileId = () => {
 export const createProfile = async ({ mainImage, name, rate }) => {
     const profile = { mainImage, name, rate };
     return await axios
-        .post(PF + "/", profile)
+        .post(PF, profile)
         .then((res) => res.data)
         .catch((err) => console.log(err));
 };

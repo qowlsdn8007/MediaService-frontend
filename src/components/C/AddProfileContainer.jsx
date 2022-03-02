@@ -14,14 +14,14 @@ import { useDispatch } from "react-redux";
 import "./AddProfile.css";
 
 const AddProfileContainer = () => {
+    const defaultImage =
+        "https://images.chosun.com/resizer/vhEbb8NoMdbLntJGo_xrXSWYLb0=/464x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosun/MUUS6BYH4JIBWKHBZ6327ROQRU.jpg";
+
     const [profile, setProfile] = useState({
-        mainImage: "",
+        mainImage: defaultImage,
         name: "",
         rate: "19+",
     });
-    const defaultImage =
-        "https://occ-0-988-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbjbcaILd-GMEENSsTfeawbBPWzzai65yPT4WBBj6ZjcPlXXIKqBJl0TkdItsaJGtPKSDC5RJ4bv_---JV-K5umdUtOk.png?r=6c2";
-
     const dispatch = useDispatch();
 
     const handleCancel = useCallback(() => {

@@ -61,7 +61,9 @@ const LoginFormMain = () => {
             if (data.hasOwnProperty("errorCode")) {
                 setIsError(data.message);
             } else {
-                axios.defaults.headers["access_token"] = data.accessToken; // access
+                setCookie("access_token", data.accessToken, 1);
+                axios.defaults.headers.common["access_token"] =
+                    data.accessToken; // access
                 setCookie("refresh_token", data.refreshToken.id, 90); // refresh
                 dispatch(setProfileList(data.profileList));
                 goToAfterLogin();

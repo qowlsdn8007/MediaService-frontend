@@ -5,7 +5,7 @@ import { getCookie } from "api/browserStorage";
 import { useDispatch } from "react-redux";
 import { getLatestProfileId, getProfile } from "api/profile";
 import { setProfile } from "modules/profile";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 //   profileId,  accessToken, refreshToken 확인 및 발행하는 hoc
 export const withAuth = (Component) => (props) => {
@@ -26,15 +26,13 @@ export const withAuth = (Component) => (props) => {
     }, [dispatch]); // 최근 프로필 설정
 
     useEffect(() => {
-        const accessToken = axios.defaults.headers.common["access_token"];
-        if (!accessToken) {
-            const refreshToken = getCookie("refresh_token");
-            if (!refreshToken) {
-                navigate("/error");
-            } else {
-                //onSilentRefresh(); // 자동 접속
-                getPid(); // 최근 프로필에 맞게 접속, 최근 기록 없으면 선택컴포넌트 출력
-            }
+        const accessToken = getCookie("access_token");
+        const refreshToken = getCookie("refresh_token");
+        if (!(accessToken || refreshToken)) {
+            navigate("/error");
+        } else {
+            //onSilentRefresh(); // 자동 접속
+            getPid(); // 최근 프로필에 맞게 접속, 최근 기록 없으면 선택컴포넌트 출력
         }
     }, [getPid, navigate]);
 

@@ -5,7 +5,7 @@ const SETMOVIES = "movie/SETMOVIES";
 export const setMovies = createAction(SETMOVIES);
 
 const initialState = {
-    movies: null,
+    movies: [],
 };
 const movie = handleActions(
     {

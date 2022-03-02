@@ -1,22 +1,62 @@
 import { Divider, MenuItem, Select } from "@mui/material";
 import { Box } from "@mui/system";
-import { setProfileManageType } from "modules/profile";
-import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { deleteProfile, getProfile, updateProfile } from "api/profile";
+import Loading from "components/common/Loading";
+import { setProfileForEditImage, setProfileManageType } from "modules/profile";
+import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import ErrorPage from "routers/ErrorPage";
 import "./EditProfile.css";
 
 const EditProfileContainer = () => {
-    const [age, setAge] = useState("19+");
-    const ageGrade = ["7+", "15+", "19+"];
+    const profileEdit = useSelector((state) => state.profile.profileForEdit);
     const dispatch = useDispatch();
-    const handleCancel = useCallback(() => {
-        dispatch(setProfileManageType("default"));
-    }, []);
+    const { isLoading, error, data } = useQuery("getProfile", () =>
+        getProfile(profileEdit.id),
+    );
 
-    const handleAgeChange = (e) => {
-        setAge(e.target.value);
+    const [name, setName] = useState(data.name);
+    const [rate, setRate] = useState(data.rate);
+    const rates = ["7+", "15+", "19+"];
+
+    const handleChangeImage = (imageUrl) => {
+        dispatch(setProfileForEditImage(imageUrl));
     };
 
+    const handleChangeName = (e) => {
+        setName(e.target.value);
+    };
+    const handleChangeRate = (e) => {
+        setRate(e.target.value);
+    };
+
+    const goBack = () => {
+        dispatch(setProfileManageType("default"));
+    };
+
+    const handleCancel = useCallback(() => {
+        goBack();
+    }, []);
+
+    const handleDeleteProfile = async () => {
+        await deleteProfile(data.id);
+        goBack();
+    };
+
+    const handleUpdateProfile = async () => {
+        const profile = {
+            mainImage: profileEdit.mainImage,
+            name: name,
+            rate: rate,
+        };
+        const id = profileEdit.id;
+        await updateProfile(profile, id);
+        goBack();
+    };
+
+    if (isLoading) return <Loading />;
+    if (error) return <ErrorPage />;
     return (
         <Box className="editprofile-center-box">
             <Box className="edit-container">
@@ -26,35 +66,50 @@ const EditProfileContainer = () => {
                     <div>
                         <img
                             className="image"
-                            src="https://occ-0-988-395.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbjbcaILd-GMEENSsTfeawbBPWzzai65yPT4WBBj6ZjcPlXXIKqBJl0TkdItsaJGtPKSDC5RJ4bv_---JV-K5umdUtOk.png?r=6c2"
+                            src={data.mainImage}
                             alt="프로필 이미지"
                         />
                     </div>
                     <div className="sub-container">
-                        <input className="input" type="text" />
+                        <input
+                            className="input"
+                            value={name}
+                            onChange={handleChangeName}
+                            type="text"
+                        />
                         <Divider className="divider" />
                         <p className="sub-text">관람 등급 설정:</p>
                         <Select
                             sx={{ backgroundColor: "#333", color: "white" }}
-                            value={age}
-                            onChange={handleAgeChange}
+                            value={rate}
+                            onChange={handleChangeRate}
                         >
-                            {ageGrade.map((age) => (
-                                <MenuItem value={age}>{age}</MenuItem>
+                            {rates.map((rate) => (
+                                <MenuItem value={rate}>{rate}</MenuItem>
                             ))}
                         </Select>
                         <p className="text">
-                            이 프로필에서는 <b>{age}</b>의 콘텐츠가 표시됩니다.
+                            이 프로필에서는 <b>{rate}</b>의 콘텐츠가 표시됩니다.
                         </p>
                     </div>
                 </div>
                 <Divider className="divider" />
                 <Box>
-                    <button className="profile-button">저장</button>
+                    <button
+                        className="profile-button"
+                        onClick={handleUpdateProfile}
+                    >
+                        저장
+                    </button>
                     <button className="profile-button" onClick={handleCancel}>
                         취소
                     </button>
-                    <button className="profile-button">프로필 삭제</button>
+                    <button
+                        className="profile-button"
+                        onClick={handleDeleteProfile}
+                    >
+                        프로필 삭제
+                    </button>
                 </Box>
             </Box>
         </Box>

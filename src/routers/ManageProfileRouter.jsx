@@ -2,7 +2,7 @@ import { getUserProfiles } from "api/profile";
 import AddProfileContainer from "components/C/AddProfileContainer";
 import EditProfileContainer from "components/C/EditProfileContainer";
 import ProfileContainer from "components/C/ProfileContainer";
-import { setProfileIdForEdit, setProfileManageType } from "modules/profile";
+import { setProfileForEdit, setProfileManageType } from "modules/profile";
 import { setHeaderRightNode } from "modules/uiControl";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,8 +17,8 @@ const ManageProfileRouter = () => {
     const dispatch = useDispatch();
 
     const handleProfileChosen = useCallback(
-        (id) => {
-            dispatch(setProfileIdForEdit());
+        (profile) => {
+            dispatch(setProfileForEdit(profile));
             dispatch(setProfileManageType("edit"));
         },
         [dispatch],
@@ -41,7 +41,7 @@ const ManageProfileRouter = () => {
     dispatch(setHeaderRightNode(null)); //  헤더 우측 비게
 
     return (
-        <div className="container">
+        <div className="dark-container">
             {manageType === "default" ? (
                 <ProfileContainer
                     title="프로필 관리"

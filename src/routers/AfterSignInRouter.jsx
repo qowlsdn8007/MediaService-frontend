@@ -22,7 +22,7 @@ const AfterSignInRouter = () => {
         },
         [dispatch],
     );
-    const chosenProfile = useSelector((state) => state.profile.currentProfile);
+    const chosenProfile = useSelector((state) => state.profile.profile);
     const getProfileList = async () => {
         const list = await getUserProfiles();
     };
@@ -38,7 +38,7 @@ const AfterSignInRouter = () => {
     };
 
     dispatch(setBackground("dark-container"));
-
+    console.log(chosenProfile);
     return (
         <>
             {chosenProfile ? (

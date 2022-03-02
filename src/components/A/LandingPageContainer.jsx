@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import "./LandingPageContainer.css";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import LoginButton from "components/common/LoginButton";
-import { getCookie } from "api/browserStorage";
+import { getCookie, setCookie } from "api/browserStorage";
 import axios from "axios";
 
 const LandinagPageContainer = () => {
@@ -59,15 +59,29 @@ const LandinagPageContainer = () => {
     );
 
     axios.interceptors.request.use(function (request) {
-        if (!request.headers.access_token) {
-            request.headers.refresh_token = getCookie("refresh_token");
+        console.log("request", request.headers);
+        if (!request.headers.hasOwnProperty("access_token")) {
+            const access_token = getCookie("access_token");
+            if (access_token) {
+                request.headers.access_token = access_token;
+            }
+            const refresh_token = getCookie("refresh_token");
+            if (refresh_token) {
+                request.headers.refresh_token = refresh_token;
+            }
         }
+        return request;
     });
+
     axios.interceptors.response.use(function (response) {
-        if (response.headers.access_token) {
+        console.log("response", response.headers);
+        if (response.headers.hasOwnProperty("access_token")) {
+            const access_token = response.headers.access_token;
+            console.log(access_token);
+            setCookie("access_token", access_token, 1);
             axios.defaults.headers.access_token = response.headers.access_token;
-            delete axios.defaults.headers.refresh_token;
         }
+        return response;
     });
 
     return (

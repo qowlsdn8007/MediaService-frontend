@@ -79,7 +79,7 @@ export const sendEmailForAuthNumber = async ({ email }) => {
 
 export const isAuthNumberCorrect = async ({ email, signUpKey }) => {
     return await axios
-        .post(AUTH + "/verify-auth")
+        .post(AUTH + "/verify-auth", { email, signUpKey })
         .then((res) => res.data)
         .catch((err) => console.log(err));
 };

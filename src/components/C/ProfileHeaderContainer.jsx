@@ -9,7 +9,7 @@ import ProfileAvatarMenu from "./ProfileAvatarMenu";
 const ProfileHeaderContainer = () => {
     const dispatch = useDispatch();
     const [profileList, setProfileList] = useState([]);
-    const currentProfile = useSelector((state) => state.profile.currentProfile);
+    const profile = useSelector((state) => state.profile.profile);
 
     //  현재는  프로필 리스트를   리덕스와   useState로 난잡하게 관리한다  -> serverState는 모두 react-query로 몰자
     // 임시
@@ -28,7 +28,7 @@ const ProfileHeaderContainer = () => {
 
     return (
         <Box>
-            <ProfileAvatar onClick={handleOpenMenu} profile={currentProfile} />
+            <ProfileAvatar onClick={handleOpenMenu} profile={profile} />
             <ProfileAvatarMenu profileList={profileList} />
         </Box>
     );
