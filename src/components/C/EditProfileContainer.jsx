@@ -16,9 +16,14 @@ const EditProfileContainer = () => {
         getProfile(profileEdit.id),
     );
 
-    const [name, setName] = useState(data.name);
-    const [rate, setRate] = useState(data.rate);
+    const [name, setName] = useState("");
+    const [rate, setRate] = useState("");
     const rates = ["7+", "15+", "19+"];
+
+    useEffect(() => {
+        data && setName(data.name);
+        data && setRate(data.rate);
+    }, [data]);
 
     const handleChangeImage = (imageUrl) => {
         dispatch(setProfileForEditImage(imageUrl));
@@ -41,6 +46,7 @@ const EditProfileContainer = () => {
 
     const handleDeleteProfile = async () => {
         await deleteProfile(data.id);
+        window.alert("삭제되었습니다.");
         goBack();
     };
 

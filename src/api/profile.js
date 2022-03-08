@@ -14,6 +14,7 @@ export const getProfile = async (id) => {
 export const getUserProfiles = async () => {
     return await axios
         .get(USER + "/profiles")
+        .then((res) => console.log(res))
         .then((res) => res.data)
         .catch((err) => console.log(err));
 };

@@ -4,6 +4,7 @@ import "./profile.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setHeaderRightNode } from "modules/uiControl";
 import AddProfileContainer from "./AddProfileContainer";
+import { Box } from "@mui/material";
 
 const ProfileContainer = ({
     title,
@@ -19,7 +20,7 @@ const ProfileContainer = ({
     return (
         <>
             {mtype === "default" ? (
-                <div>
+                <Box className="profile-center-box">
                     <h1 className="text">{title}</h1>
                     <ProfileList
                         list={list}
@@ -29,7 +30,7 @@ const ProfileContainer = ({
                     <button onClick={onButtonClick} className="profile-button">
                         {btnName}
                     </button>
-                </div>
+                </Box>
             ) : (
                 <AddProfileContainer />
             )}

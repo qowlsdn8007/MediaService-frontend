@@ -39,7 +39,6 @@ function App() {
     axios.interceptors.response.use(function (response: any) {
         if (response.headers.hasOwnProperty("access_token")) {
             const access_token = response.headers.access_token;
-            console.log(access_token);
             setCookie("access_token", access_token, 1);
             axios.defaults.headers.common["access_token"] = response.headers.access_token;
         }

@@ -58,32 +58,6 @@ const LandinagPageContainer = () => {
         [errText, goToSignIn, goToSignUp],
     );
 
-    axios.interceptors.request.use(function (request) {
-        console.log("request", request.headers);
-        if (!request.headers.hasOwnProperty("access_token")) {
-            const access_token = getCookie("access_token");
-            if (access_token) {
-                request.headers.access_token = access_token;
-            }
-            const refresh_token = getCookie("refresh_token");
-            if (refresh_token) {
-                request.headers.refresh_token = refresh_token;
-            }
-        }
-        return request;
-    });
-
-    axios.interceptors.response.use(function (response) {
-        console.log("response", response.headers);
-        if (response.headers.hasOwnProperty("access_token")) {
-            const access_token = response.headers.access_token;
-            console.log(access_token);
-            setCookie("access_token", access_token, 1);
-            axios.defaults.headers.access_token = response.headers.access_token;
-        }
-        return response;
-    });
-
     return (
         <Box>
             <Box className="content-box">
@@ -109,9 +83,9 @@ const LandinagPageContainer = () => {
                         variant="contained"
                         style={{ backgroundColor: "#e50914" }}
                         onClick={() => handleStart(email)}
-                        onKeyPress={(e) =>
-                            e.key === "Enter" && console.log(e.key)
-                        }
+                        onKeyPress={(e) => {
+                            if (e.key === "Enter") handleStart(email);
+                        }}
                     >
                         <span>시작하기</span>
                         <ArrowForwardIosIcon />

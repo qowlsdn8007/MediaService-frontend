@@ -5,7 +5,6 @@ import React from "react";
 const AccountManageRouter = () => {
     return (
         <>
-            <MainHeader />
             <AccountManageContainer />
         </>
     );

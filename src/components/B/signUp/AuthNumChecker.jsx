@@ -1,11 +1,23 @@
 import { Button, TextField } from "@mui/material";
 import { Box } from "@mui/system";
+import { isAuthNumberCorrect } from "api/sign";
 import React, { useState } from "react";
 
-const AuthNumChecker = ({ checkNum, setCheck }) => {
-    const [num, setNum] = useState("");
+const AuthNumChecker = ({ email, setCheck }) => {
+    const [signUpKey, setSignUpKey] = useState("");
+    const [showErrorText, setShowErrorText] = useState(false);
     const handleChangeNum = (e) => {
-        setNum(e.target.value);
+        setSignUpKey(e.target.value);
+    };
+
+    const handleCheckAuthNum = async ({ email, signUpKey }) => {
+        const response = await isAuthNumberCorrect({ email, signUpKey });
+        const status = response === 200 ? true : false;
+        if (status) {
+            setCheck(true);
+        } else {
+            setShowErrorText(true);
+        }
     };
     return (
         <Box>
@@ -13,17 +25,20 @@ const AuthNumChecker = ({ checkNum, setCheck }) => {
             <Box sx={{ display: "flex" }}>
                 <TextField
                     sx={{ width: "100%" }}
-                    value={num}
+                    value={signUpKey}
                     onChange={handleChangeNum}
                 />
                 <Button
                     sx={{ backgroundColor: "#e50914" }}
                     variant="contained"
-                    onClick={() => checkNum(num)}
+                    onClick={() => handleCheckAuthNum({ email, signUpKey })}
                 >
                     확인
                 </Button>
             </Box>
+            {showErrorText && (
+                <p style={{ color: "red" }}>인증번호가 일치하지 않습니다.</p>
+            )}
         </Box>
     );
 };

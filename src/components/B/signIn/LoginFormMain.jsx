@@ -43,8 +43,6 @@ const LoginFormMain = () => {
     };
 
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
     const goToAfterLogin = () => {
         navigate("/browse");
     };
@@ -52,20 +50,20 @@ const LoginFormMain = () => {
     const signInMutation = useMutation(onSignIn, {
         onError: (error, variable, context) => {
             // error
-            console.log();
-            setIsError(error.message);
+            console.log("error", error);
+            error && setIsError(error);
             //  서버에서 errorcode를 status 200 으로 주고 있다....
         },
         onSuccess: (data, variables, context) => {
             console.log("success", data, variables, context);
             if (data.hasOwnProperty("errorCode")) {
                 setIsError(data.message);
-            } else {
-                setCookie("access_token", data.accessToken, 1);
-                axios.defaults.headers.common["access_token"] =
-                    data.accessToken; // access
-                setCookie("refresh_token", data.refreshToken.id, 90); // refresh
-                dispatch(setProfileList(data.profileList));
+            } else if (data.hasOwnProperty("accessToken")) {
+                const access_token = data.accessToken;
+                const refresh_token = data.refreshToken.id;
+                setCookie("access_token", access_token, 1);
+                setCookie("refresh_token", refresh_token, 90); // refresh
+                axios.defaults.headers.common["access_token"] = access_token;
                 goToAfterLogin();
             }
         },

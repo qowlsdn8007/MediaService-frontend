@@ -34,7 +34,7 @@ const ProfileList = ({ type, onProfileClick }) => {
                     >
                         <div>
                             <img
-                                style={{ borderRadius: "1rem" }}
+                                className="profile-image"
                                 src={profile.mainImage}
                                 alt={profile.name}
                                 key={profile.id}
@@ -42,10 +42,11 @@ const ProfileList = ({ type, onProfileClick }) => {
                             {type === "manage" && (
                                 <EditIcon className="profile-update" />
                             )}
+                            <p>{profile.name}</p>
                         </div>
                     </li>
                 ))}
-            {data.length < 5 && (
+            {data && data.length < 5 && (
                 <li className="profile-item" onClick={handleClickAdd}>
                     <div>
                         <AddCircleIcon

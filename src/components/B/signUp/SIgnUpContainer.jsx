@@ -6,7 +6,7 @@ import {
     TextField,
 } from "@mui/material";
 import { validateEmail, validatePassword } from "api/validation";
-import { onSignUp } from "api/sign";
+import { isAuthNumberCorrect, onSignUp } from "api/sign";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthNumChecker from "./AuthNumChecker";
@@ -67,15 +67,12 @@ const SignUpContainer = () => {
     const handleAgree = async () => {
         const reqData = { email, password: pw };
         const resData = await onSignUp(reqData);
-        if (resData.hasOwnProperty("email")) goToHome();
-        else {
+        if (resData.hasOwnProperty("email")) {
+            window.alert("가입이 완료되었습니다.");
+            goToHome();
+        } else {
             console.log(resData.errorCode);
         }
-    };
-
-    const handleCheckAuthNum = async (num) => {
-        // await 인증확인요청
-        setCheckAuthNum(true);
     };
 
     const enableAgree = !errPw && isPwConfirm && agree;
@@ -172,7 +169,7 @@ const SignUpContainer = () => {
                         </div>
                     </div>
                 ) : (
-                    <AuthNumChecker checkNum={handleCheckAuthNum} />
+                    <AuthNumChecker email={email} setCheck={setCheckAuthNum} />
                 )}
             </Box>
         </Box>
