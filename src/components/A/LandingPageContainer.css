@@ -1,29 +1,32 @@
-.landing-container {
-    height: 80vh;
-    width: 100%;
-    background: radial-gradient(transparent 50%, black),
-        url("https://assets.nflxext.com/ffe/siteui/vlv3/6dea7743-5586-45d1-89a2-9569b1bb0340/79c3c9e6-9da9-4265-9e1e-c4ae6d0fbf2c/KR-ko-20220207-popsignuptwoweeks-perspective_alpha_website_small.jpg");
-    background-size: cover;
-}
+@media only screen and (min-width: 1450px),
+    only screen and (min-width: 950px) and (max-width: 1449px) {
+    .landing-container {
+        width: 100%;
+        background: radial-gradient(transparent 50%, black),
+            url("https://assets.nflxext.com/ffe/siteui/vlv3/6dea7743-5586-45d1-89a2-9569b1bb0340/79c3c9e6-9da9-4265-9e1e-c4ae6d0fbf2c/KR-ko-20220207-popsignuptwoweeks-perspective_alpha_website_small.jpg");
+        background-size: cover;
+        border-bottom: 8px solid #222;
+    }
 
-.landing-container .text {
-    color: white;
-}
+    .landing-container .text {
+        color: white;
+    }
 
-.landing-container .input-box {
-    position: relative;
-}
+    .landing-container .input-box {
+        position: relative;
+    }
 
-.landing-container .input-box .input {
-    background-color: white;
-}
+    .landing-container .input-box .input {
+        background-color: white;
+    }
 
-.landing-container .input-box .button {
-    height: 6vh;
-    color: white;
-    font-size: 1.625rem;
-}
+    .landing-container .input-box .button {
+        height: 6vh;
+        color: white;
+        font-size: 1.625rem;
+    }
 
-.landing-container .content-box {
-    padding: 10em;
+    .landing-container .content-box {
+        padding: 10em;
+    }
 }

@@ -1,0 +1,27 @@
+.story-card-container {
+    display: flex;
+    padding: 45px 45px 45px 70px;
+    color: #fff;
+    border-bottom: 8px solid #222;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+}
+
+.story-card-container .text-card {
+    text-align: left;
+}
+
+.story-card-container .text-card h1 {
+    font-size: 3.125rem;
+}
+
+.story-card-container .text-card h2 {
+    font-size: 1.625rem;
+}
+
+.story-card-title {
+}
+
+.story-card-subtitle {
+}
